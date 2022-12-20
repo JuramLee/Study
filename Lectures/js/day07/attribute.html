@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attribute</title>
+</head>
+<body>
+    <div id="attribute">속성
+    <input name="attribute-name" placeholder="속성명을 입력해주세요">
+    <input name="attribute-value" placeholder="속성값을 입력해주세요">
+    <button onclick="addAttribute()">속성 추가</button>
+    <button onclick="readAttribute()">속성 조회</button>
+    <button onclick="deleteAttribute()">속성 삭제</button>
+</div>
+</body>
+<script>
+    const $attributeEl = document.getElementById('attribute');
+    const $attributeNameInput = document.getElementsByName('attribute-name')[0];
+    const $attributeValeInput = document.getElementsByName('attribute-value')[0];
+
+    function addAttribute() {
+        if(!$attributeNameInput.value || !$attributeValeInput.value) return;
+        $attributeEl.setAttribute($attributeNameInput.value, $attributeValeInput.value);
+    }
+
+    function readAttribute() {
+        if(!$attributeNameInput.value) return;
+        const temp = $attributeEl.getAttribute($attributeNameInput.value);
+        console.log(temp);
+    }
+
+    function deleteAttribute() {
+        if(!$attributeNameInput.value) return;
+        $attributeEl.removeAttribute($attributeNameInput.value);
+    }
+
+
+</script>
+</html>

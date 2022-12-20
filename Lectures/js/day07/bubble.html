@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble</title>
+</head>
+
+<style>
+    body * {
+        margin: 10px;
+        border: 1px solid blue;
+    }
+</style>
+<body>
+    <div class="DIV1">
+        DIV1
+        <div class="DIV2">
+            DIV2
+            <div class="DIV3">DIV3</div>
+        </div>
+    </div>
+    <script>
+        const divs = document.querySelectorAll('div');
+
+        const onClickDiv = (e) => {
+            e.stopPropagation();
+            console.log(e.currentTarget.className);
+            // 겹쳐있는 요소에서 event가 일어난 객체를 가지고 올 때는 currentTarget
+            // 아니면 그냥 target
+        };
+
+        for (let div of divs) {
+            div.addEventListener('click', onClickDiv);
+        }
+    </script>
+</body>
+</html>

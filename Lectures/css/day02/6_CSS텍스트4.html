@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS텍스트4</title>
+    <style>
+        .content {
+            border: 3px dotted #f00;
+            width: 600px;
+            padding: 10px;
+            white-space: nowrap;
+            /* white-space: pre; */
+            /* 기본 값은 wrap, nowrap은 공백[띄어쓰기 외] 및 줄바꿈을 허용 x */
+            /* pre , 줄바꿈과 공백을 모두 허용 */
+            overflow: hidden;
+            /* 넘어갔을 때 넘어간 부분을 어떻게 처리할지 */
+            text-overflow: ellipsis;
+            /* 말줄임표 */
+        }
+
+        .content:hover {
+            overflow: visible;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>text-overflow</h2>
+    <p class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Possimus, hic? Expedita totam
+        praesentium suscipit
+        quibusdam maiores. Harum architecto magnam sit, facere possimus, doloribus sunt quaerat, iste commodi accusamus
+        praesentium sapiente.</p>
+</body>
+
+</html>
