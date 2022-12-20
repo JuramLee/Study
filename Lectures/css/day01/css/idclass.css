@@ -1,0 +1,31 @@
+#header {
+    background-color: red;
+}
+
+#content {
+    background-color: green;
+}
+
+#footer {
+    background-color: blue;
+}
+
+
+.bigFont {
+    font-size: 50px;
+}
+
+.smallFont {
+    font-size: 10px;
+    /* css의 주석은  
+       font size의 기본 값은 16px;
+    */
+}
+
+.redText {
+    color: red;
+}
+
+.blueText {
+    color: blue;
+}

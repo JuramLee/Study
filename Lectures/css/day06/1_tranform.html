@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>트랜스폼 -1</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        div {
+            width: 300px;
+            height: 200px;
+            margin: 16px;
+            border: 1px solid #000;
+            transition: all 0.5s ease-in-out;
+        }
+
+        #scale:hover {
+            transform: scale(1.5);
+            transform: scale(0.5);
+            transform: scaleX(-1);
+            transform: scaleY(-1);
+        }
+
+        #translate:hover {
+            transform: translateX(50%);
+            transform: translateX(50px);
+            transform: translateY(50%);
+            transform: translate(30%, 30%);
+        }
+
+        #rotate:hover {
+            transform: rotate(90deg);
+            transform: rotateY(180deg);
+            transform: perspective(50px) rotateY(180deg);
+            transform: perspective(150px) rotateX(180deg) rotateY(180deg);
+        }
+
+        #black {
+            position: absolute;
+            width: 30vw;
+            height: 100vh;
+            background-color: #000;
+        }
+
+        #black:hover {
+            transform: skew(15deg);
+        }
+
+        #menu {
+            width: 300px;
+            height: 30px;
+            /* 보이게 만들려고 0이 아닌 px*/
+            background-color: red;
+            transition: height 2s ease;
+        }
+
+        #menu:hover {
+            height: 300px;
+            /* 100% auto는 먹히지 않습니다 */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div id="black"></div> -->
+    <div id="scale">scale</div>
+    <div id="translate">translate</div>
+    <div id="rotate">rotate</div>
+    <div id="menu"></div>
+</body>
+
+</html>

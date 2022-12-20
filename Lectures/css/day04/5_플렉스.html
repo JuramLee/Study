@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>플렉스</title>
+    <style>
+        .flex {
+            width: 800px;
+            height: 300px;
+            background-color: blue;
+            color: #fff;
+            display: flex;
+            /* flex-direction: column; */
+        }
+
+        ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        ul.flex {
+            justify-content: center;
+            justify-content: flex-end;
+            justify-content: flex-start;
+            align-items: center;
+            align-items: flex-end;
+            align-items: flex-start;
+        }
+
+        ul.flex li {
+            /*부모의 크기를 넘지 못한다, 넘기 위해서 min*/
+            min-width: 200px;
+        }
+
+        div.flex {
+            flex-wrap: wrap;
+            color: #fff;
+        }
+
+        div.flex>div {
+            width: 300px;
+            /* 1500px > 800px */
+            /* height: 30px; */
+            /* height: 100px; */
+            background-color: black;
+
+
+            /* 
+                flex 속성의 자식속성은 부모 크기를 넘지 못한다. 따라서 부모 길이만큼 길이가 자동조정
+                내가 설정한 크기 유지하면서 넘게 만들기위하여 min을 사용하거나 다음 줄로 줄바꿈
+
+                자식의 높이는 기본 속성때문에 부모만큼 커지는데
+                height를 지정해주면 부모 속성만큼 커지지 않으나 공백이 발생
+                공백을 없애기 위해서 부모 속성의 hegiht 제거
+            */
+        }
+
+        .container {
+            width: 300px;
+            height: 500px;
+            background-color: purple;
+            margin: 16px;
+            color: #fff;
+            /* css 상속 -> 폰트, 컬러, 배경, ... 관련 속성은 자식 요소 css 속성에게 위임*/
+        }
+
+        .container>div {
+            height: 48px;
+            background-color: red;
+        }
+
+        .flexCenter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>디스플레이 플렉스</h2>
+    <ul class="flex">
+        <li>content</li>
+        <li>content</li>
+        <li>content</li>
+        <li>content</li>
+        <li>content</li>
+    </ul>
+    <div class="flex">
+        <div>content</div>
+        <div>content</div>
+        <div>content</div>
+        <div>content</div>
+        <div>content</div>
+    </div>
+
+    <div class="flexCenter container">
+        <div class="flexCenter">content</div>
+    </div>
+</body>
+
+</html>

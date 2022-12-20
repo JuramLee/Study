@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>그리드 시스템</title>
+    <style>
+        main {
+            background-color: #000;
+            color: #fff;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: minmax(500px, auto);
+            grid-gap: 16px;
+        }
+
+        img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            /*종횡비 가로가 4일 때 세로가 3*/
+            background-color: #d9d9d9;
+        }
+
+        .long {
+            grid-column: 1 / 3;
+            grid-column: 1 / span 2;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores dolorem
+            autem distinctio tenetur, ipsum labore tempora temporibus veniam, aut
+            dolore est sequi odit quaerat eum ad impedit repellat voluptas
+            laboriosam.
+        </div>
+        <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque minus
+            numquam, fugit voluptates dignissimos porro. Praesentium quaerat ullam,
+            quod facilis repudiandae doloremque vitae debitis commodi est omnis
+            accusantium beatae dolorem!
+        </div>
+        <img />
+        <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque minus
+            numquam, fugit voluptates dignissimos porro. Praesentium quaerat ullam,
+            quod facilis repudiandae doloremque vitae debitis commodi est omnis
+            accusantium beatae dolorem!
+        </div>
+        <img />
+        <div>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Porro esse nam
+            quas suscipit id ipsum tempora, quos iste, adipisci eligendi natus enim
+            debitis accusamus numquam animi voluptate consequatur asperiores libero.
+        </div>
+        <div class="long">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, ea!
+            Eveniet omnis soluta, assumenda quasi, eaque saepe at id minima
+            voluptatibus cumque tempora debitis numquam dolorum. Omnis veritatis
+            ullam voluptatibus?Lorem ipsum dolor sit, amet consectetur adipisicing
+            elit. Ullam repudiandae rerum similique veniam nostrum nemo! Architecto
+            reprehenderit, delectus iusto cum obcaecati fugit nisi porro alias quod
+            animi, incidunt laboriosam rerum? Lorem ipsum, dolor sit amet
+            consectetur adipisicing elit. Quia consequuntur aliquam dolores in
+            accusantium culpa saepe, alias sequi labore tempore quisquam libero
+            officia et ab! Neque, quod voluptas! Repudiandae, repellendus.
+        </div>
+        <img class="full" />
+        <div>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime,
+            officia. Praesentium eos dolores harum ad, voluptatibus non commodi
+            labore porro odit excepturi totam corrupti aliquam doloribus at cumque
+            fugiat molestiae.
+        </div>
+        <div>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime,
+            officia. Praesentium eos dolores harum ad, voluptatibus non commodi
+            labore porro odit excepturi totam corrupti aliquam doloribus at cumque
+            fugiat molestiae.
+        </div>
+        <div>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime,
+            officia. Praesentium eos dolores harum ad, voluptatibus non commodi
+            labore porro odit excepturi totam corrupti aliquam doloribus at cumque
+            fugiat molestiae.
+        </div>
+        <div>
+            Lorem ipsum dolorㅣ sit amet, consectetur adipisicing elit. Maxime,
+            officia. Praesentium eos dolores harum ad, voluptatibus non commodi
+            labore porro odit excepturi totam corrupti aliquam doloribus at cumque
+            fugiat molestiae.
+        </div>
+    </main>
+</body>
+
+</html>

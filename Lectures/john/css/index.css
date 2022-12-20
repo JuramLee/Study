@@ -1,0 +1,66 @@
+/* 
+index.page
+*/
+
+:root {
+    --font-color: #fff;
+}
+
+* {
+    color: var(--font-color);
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    background: url('../assets/img/main/jw1.jpeg') no-repeat center;
+    background-size: cover;
+}
+
+#shadow_box {
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.652) 60%, rgba(0, 0, 0, 0));
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    /*겹치는 요소 우선순위*/
+}
+
+#trailer_btn {
+    position: absolute;
+    top: 50%;
+    right: 32px;
+    transform: rotate(-90deg);
+    text-transform: uppercase;
+}
+
+#trailer_arrow {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    animation: move 1s infinite linear;
+}
+
+@keyframes move {
+    0% {
+        transform: translateX(0px);
+    }
+    100% {
+        transform: translateX(5px);
+    }
+}
+
+/* main */
+section {
+    font-family: 'Montserrat', sans-serif;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 10%;
+    z-index: 1000;
+}
+
+main > section > #chapter_title > img {
+    width: 40%;
+}

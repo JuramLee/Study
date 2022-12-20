@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Roboto&display=swap');
+@import "./reset.css";
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+#wrapper {
+    display: flex;
+    height: 100vh;
+}
+
+#banner {
+    width: 480px;
+    background-color: violet;
+    color: aqua;
+    font-weight: bold;
+}
+
+#banner>header {
+    width: 100%;
+    height: 48px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    padding-left: 5%;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+}
+
+#banner>section {
+    height: calc(100% - 48px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+}
+
+#container {
+    width: calc(100% - 480px);
+}
+
+#container>header {
+    height: 48px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 32px;
+    font-weight: bold;
+}
+
+#container>header>ul {
+    display: flex;
+    list-style: none;
+}
+
+#container>header>ul>li {
+    margin-left: 16px;
+    cursor: pointer;
+}
+
+#container>header>ul>li:hover {
+    transform: scale(1.1);
+}
+
+#container>main {
+    height: calc(100% - 48px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#container>main>#login_form {
+    width: 500px;
+    padding: 16px;
+}
+
+#login_form>input {
+    width: 100%;
+    height: 80px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    outline: none;
+    border: 1px solid #999;
+    padding: 0 16px;
+}
+
+#login_form>p {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+#login_form>p>span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+#login_form>button {
+    width: 100%;
+    height: 60px;
+    border: none;
+    background-color: violet;
+    color: #fff;
+    cursor: pointer;
+}
+
+#login_form>button:hover {
+    opacity: 0.7;
+}

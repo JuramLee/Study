@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form</title>
+</head>
+<body>
+    <form method="get">
+        <p><input type="text" name="user_id"></p>
+        <p><input type="password" name="user_pw"></p>
+        <button type="button">로그인</button> <!-- 버튼의 기본 타입은 submit -->
+    </form>
+    <!--
+        post
+        action에서 정의된 주소[보통 백엔드 서버] 혹은 현재 주소에
+
+        {
+            "user_id": "1234",
+            "user_pw": "1234"
+        } ->> req.body에 실려서 백엔드에 전달
+    -->
+</body>
+</html>
