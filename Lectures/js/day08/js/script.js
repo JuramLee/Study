@@ -1,21 +1,120 @@
 const musicListData = [
-    {
-        src: '../assets/image/iu_0.jpg',
-        color: ['#0272a4', '#f6a564'],
-    },
-    {
-        src: '../assets/image/iu_1.jpg',
-        color: ['#b6bfc8', '#36595b'],
-    },
-    {
-        src: '../assets/image/iu_2.jpg',
-        color: ['#e58e82', '#6f569f'],
-    },
-]
+  {
+    src: "./assets/image/iu_0.jpg",
+    color: ["#0272a4", "#f6a564"],
+  },
+  {
+    src: "./assets/image/iu_1.jpg",
+    color: ["#b6bfc8", "#36595b"],
+  },
+  {
+    src: "./assets/image/iu_2.jpg",
+    color: ["#e58e82", "#6f569f"],
+  },
+  
+];
+
+
+const $playList = document.getElementById('ls');
+
+for (let i = 0 ; i < musicListData.length ; i++) {
+  const $createLi = document.createElement('li');
+  $playList.appendChild($createLi); 
+}
+
+const $playListItem = document.getElementById('ls').children;
+
+for (let i = 0 ; i < musicListData.length ; i++){
+  const $coverLi = document.createElement('img');
+  $playListItem[i].appendChild($coverLi);
+  $playListItem[i].innerHTML = `<img src="${musicListData[i].src}" alt="아이유 노래">`
+}
+
+
+let playIndex = 0;
+let playStatus = false;
+let selected = false;
+const $btns = document.querySelectorAll('.list_btn_group');
+const $prevBtn = document.querySelector('.list_btn_group > button:first-child');
+const $nextBtn = document.querySelector('.list_btn_group > button:last-child');
+const $current = document.querySelector('.disk_inner');
+const $main = document.getElementById('main');
+const $playBtn = document.querySelector('.play_btn_group > button:first-child');
+const $stopBtn = document.querySelector('.play_btn_group > button:last-child');
+const $disk = document.querySelector('.disk');
+
+
+
+function prevPlay() {
+  if (playIndex <= 0) {
+    playIndex = 0;
+  } else playIndex--;
+
+  for(let i = 0 ; i < musicListData.length ; i++) {
+    $playListItem[i].classList.remove('play');
+  }
+
+  selected = true;
+  $playListItem[playIndex].classList.add('play');
+  $current.setAttribute('style', `background-color: ${musicListData[playIndex].color[0]}`);
+  $main.setAttribute('style', `background: linear-gradient(120deg, ${musicListData[playIndex].color[0]}, ${musicListData[playIndex].color[1]})`);
+  if(playStatus == true) {
+    $main.children[0].src = musicListData[playIndex].src;
+  } else $main.children[0].src = "";
+  
+}
+
+function nextPlay() {
+  if (playIndex >= musicListData.length -1) {
+    playIndex = 0;
+  } else playIndex++;
+  
+  for(let i = 0 ; i < musicListData.length ; i++) {
+    $playListItem[i].classList.remove('play');
+  }
+  
+  selected = true;
+  $playListItem[playIndex].classList.add('play');
+  $current.setAttribute('style', `background-color: ${musicListData[playIndex].color[0]}`);
+  $main.setAttribute('style', `background: linear-gradient(120deg, ${musicListData[playIndex].color[0]}, ${musicListData[playIndex].color[1]})`);
+  if(playStatus == true) {
+    $main.children[0].src = musicListData[playIndex].src;
+  } else $main.children[0].src = "";
+
+}
+
+$prevBtn.addEventListener('click', prevPlay);
+$nextBtn.addEventListener('click', nextPlay);
+
+
+function playMusic() {
+  playStatus = true;
+  if(selected == true){
+  $disk.classList.add('active');
+  console.log($playListItem[playIndex]);
+  $main.children[0].src = musicListData[playIndex].src;
+  // $main.children[0].setAttribute('style', 'background-size: cover');
+  // $main.setAttribute('style', `background: src:${musicListData[playIndex].src})`);
+  }
+}
+
+function stopMusic() {
+  playStatus = false;
+  $main.children[0].src = ""
+  $disk.classList.remove('active');
+}
+
+$playBtn.addEventListener('click', playMusic);
+$stopBtn.addEventListener('click', stopMusic);
+
+
+
+
+
 
 /* 요소정리
 1. .list_btn_group > ul
-    - li채그의 자식요소로 이미지를 갖고
+    - li태그의 자식요소로 이미지를 갖고
     - 해당 ul의 자식으로서 추가
 
 2. .list_btn_group > button:first-child
