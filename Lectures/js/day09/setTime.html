@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SET-TIME</title>
+</head>
+<body>
+    <div id="selector">저를 선택해주세요</div>
+    <button onclick="handleStartSetTime()">셋타임 시작</button>
+    <button onclick="handleStopSetTime()">셋타임 취소</button>
+    <button onclick="handleStartSetInterval()">셋인터벌 시작</button>
+    <button onclick="handleStopSetInterval()">셋인터벌 취소</button>
+
+    <script>
+        const $selector = document.getElementById('selector');
+        let setTime;
+        let interval;
+
+        function selectorPrint() {
+            console.log($selector.innerText);
+        }
+
+        function handleStartSetTime() {
+            setTime = setTimeout(selectorPrint, 3000);
+            //1000ms = 1초
+            //최소 3초 뒤에 실행
+        }
+
+        function handleStopSetTime() {
+            clearTimeout(setTime);
+        }
+
+        function handleStartSetInterval() {
+            interval = setInterval(selectorPrint, 3000);
+        }
+
+        function handleStopSetInterval() {
+            clearInterval(interval);
+        }
+
+    </script>
+</body>
+</html>
