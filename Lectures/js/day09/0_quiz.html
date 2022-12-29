@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <title>Document</title>
+    <script>
+        // console.log(location.search); // String형태로 반환
+        // const params = new URLSearchParams(location.search); // 검색하기 쉽도록 urlsearchparam 인스턴스로 변환
+        // console.log(params.get('postId')); // 검색해서 찾아올 수 있으며
+        // // 이터러블 하기 때문에 for of 사용 가능
+
+        // for(const param of params) {
+        //     console.log(param); // 반환값은 배열
+        // }
+    </script>
+</head>
+<body>
+    <h2>제목과 내용</h2>
+    <script>
+        const BACKEND_URL = 'https://jsonplaceholder.typicode.com';
+        async function quiz() {
+
+        try{
+        const result = await axios.get(BACKEND_URL + '/posts');
+        const ten_result = result.data.slice(0,10);
+        const $h2 = document.querySelector('h2');
+
+
+        for (let post of ten_result) {
+                const h3 = document.createElement('h3');
+
+                h3.innerHTML = `
+                <a href='./0_post.html?postId=${post.id}'>${post.title}</a>
+                <h3>${post.body}</h3>
+                `;
+
+                $h2.append(h3);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    quiz();
+    </script>
+    <!-- 
+
+        /posts를 활용하여 10개의 데이터만 가지고 온 후
+        화면에 제목과 타이틀을 표기
+        제목을 누르면 post.html로 post.html로 이동되었을 때
+        주소로 데이터를 전달하여 이동하고
+        선택한 해당 post의 상세 페이지를 post.html로 구현
+
+        심화*
+        댓글 창도 같이 구현
+        
+     -->
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>내용</h2>
+    <script>
+        const BACKEND_URL = 'https://jsonplaceholder.typicode.com';
+        const params = new URLSearchParams(location.search);
+        // console.log(params.get('postId'));
+        const param = params.get('postId');
+        const $get = document.querySelector('h2');
+        
+
+
+        
+        axios.get(BACKEND_URL + `/posts/${param}`).then((res) => {
+            console.log($get);
+            $get.innerHTML = res.data.title + res.data.body;
+        })
+
+        
+        axios.get(BACKEND_URL + `/posts/${param}/comments`).then((res) => {
+            console.log(res);
+        });
+        // console.log(temp)
+        // const allcomments = temp.data.push();
+        // let coms = [];
+
+
+        // console.log(temp);
+        // for( let com of temp) {
+        //     coms.push(com);
+        // }
+
+    </script>
+</body>
+
+</html>

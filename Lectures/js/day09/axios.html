@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Axios</title>
+</head>
+<body>
+    <h2>TEST</h2>
+    <table>
+        <tr>
+            <th>제목</th>
+            <th>내용</th>
+        </tr>
+    </table>
+    <a href="./404.html">이동</a>
+    <script>
+    const BACKEND_URL = 'https://jsonplaceholder.typicode.com';
+
+    
+    function errHandle(message, status) {
+        alert(message, status);
+        
+        switch (status) {
+            case 404: 
+            location.href = './404.html';
+        }
+    }
+
+    async function loadPostsApi() {
+        try{
+            // location.assign('./404.html');
+            // location.href = './404.html';
+            // alert('test');
+            // location.reload();
+            // console.log(location.hostname);
+
+            const result = await axios.get(BACKEND_URL + '/posts');
+            const ten_result = result.data.slice(0,10);
+            const $table = document.querySelector('table');
+
+            for (let post of ten_result) {
+                const tr = document.createElement('tr');
+
+                tr.innerHTML = `
+                <td>${post.title}</td>
+                <td>${post.body}</td>
+                `;
+
+                $table.append(tr);
+            }
+
+            console.log(result.data);
+        }catch (err) {
+            errHandle(err.message, err.response.status);
+        }
+    }
+    loadPostsApi();
+
+    // axios({          바로 위 async와 같은 코드
+    //     method: 'GET',
+    //     url : BACKEND_URL + '/posts',
+
+    // }).then((res) => {
+    //     console.log(res);
+    //     console.log(res.data);
+    // });
+    </script>
+</body>
+</html>
