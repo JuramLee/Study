@@ -28,6 +28,7 @@ for (let i = 0 ; i < musicListData.length ; i++){
   const $coverLi = document.createElement('img');
   $playListItem[i].appendChild($coverLi);
   $playListItem[i].innerHTML = `<img src="${musicListData[i].src}" alt="아이유 노래">`
+  // $playListItem[i].addEventListener('click', )
 }
 
 
@@ -107,7 +108,9 @@ function stopMusic() {
 $playBtn.addEventListener('click', playMusic);
 $stopBtn.addEventListener('click', stopMusic);
 
-
+function imgPlay() {
+  
+}
 
 
 

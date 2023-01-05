@@ -145,9 +145,8 @@
       <script>
 
         const $menu = document.querySelector('menu');
-        const $hideMenu = document.querySelector('hide-menu');
+        const $hideMenu = document.querySelector('.hide-menu');
 
-        (function () {
             const padding = 64;
             const hideMenuHeight = $hideMenu.offsetHeight;
             $hideMenu.style.height = 0;
@@ -161,7 +160,7 @@
                 $hideMenu.style.height = 0;
                 $hideMenu.style.padding = 0;
             })
-        })
+      
         //   const $hidemenu = document.getElementsByClassName('hide-menu');
         //   const $mainmenu = document.getElementsByClassName('main-menu');
 
