@@ -1,0 +1,133 @@
+이터러블, 이터레이터 (iterable, iterator)
+
+    자바스크립트에서의 이터러블하다는 것은 자료를 반복할 수 있다는 뜻
+    for of, for문이 사용 가능한가
+
+    iterable : iterator를 반환하는 [Symbol.iterator]() 메서드를 가진 객체
+        ex) 배열, 문자열, set, map
+
+    iterator : {value: 값, done: t/f}형태의 이터레이터 객체를 리턴하는 next() 메서드를 가진 객체
+               next 메서드로 순환할 수 있는 객체
+               [Symbol.iterator]() 안에 내장
+
+=> 이터러블하다는 것은 자료를 반복할 수 있다. for of 사용이 가능한가?
+
+---------------------------------------------------------------------------------------------
+
+Set
+
+set은 중복을 허용하지 안흔ㄴ 값을 모아놓은 특별한 컬렉션(객체)
+set에는 키가 없는 값이 저장
+이터러블 객체를 파라미터로 전달받음( 보통 배열을 받는다 )
+
+    let set = new Set([1, 1, 2, 2, 3, 4, 3, 5]);
+    console.log(set);   // {1, 2, 3, 4, 5} (중복을 제거해준다)
+
+    set.add(value) : 값을 추가하고 반환 값은 추가된 set 자신
+        set.add(6) => {1,2,3,4,5,6}
+        
+    set.delete(value) : 값을 삭제. 반환 값은 boolean을 반환
+    set.has(value) : 값이 존재하는지 확인. 반환 값은 boolean
+    set.clear(value) : set을 전체 삭제
+    set.size(value) : 현재 set에 몇개의 데이터가 저장되어 있는지
+    set.keys(), set.values(), set.entries() => map과 연관
+
+=> 이터러블 객체의 중복 데이터를 삭제하기 위해 사용
+
+ex) set도 이터러블하기 때문에 for of 사용 가능
+    for (const number of set) {
+        console.log(number);
+    }
+
+---------------------------------------------------------------------------------------------
+
+전개 연산자
+
+    깊은 복사, 복사, 오브젝트를 전개한다 => 안에 내용물만 펼친다
+
+    const arr = [1, 2, 3, 4, 5];
+    ...arr = 1,2,3,4,5;
+
+    const newArr = [ ...arr ]
+
+---------------------------------------------------------------------------------------------
+
+map
+    키가 있는 데이터를 저장한다는 점에서 객체와 유사
+    다만, 맵은 키에 문자열이 아닌 다양한 자료형을 허용한다는 점에서 차이가 있음
+
+    const map = new Map();
+
+    map.set(key, value);
+  * map[key] = value => 올바른 사용법이 아니다. 이 방법은 map을 객체로 취급하게 됨
+
+    map.get(key) : 해당 키 값의 데이터 반환
+    map.has(key) : 해당 키 값이 있는지 판단 boolean 반환
+    map.delete(key) : 해당 키 값 삭제
+    map.clear(key) : 모든 map 요소 삭제
+    map.size(key) : map요소 개수를 반환
+
+    const map = new Map([[key, value], ["name", "Juram"], ["age", "20"], ["height", "170"]]);
+
+---------------------------------------------------------------------------------------------
+
+    삼항연산자
+
+    조건식 ? 참일때 실행 : 거짓일 때 실행
+    const answer = 3 > 0 ? (return 생략) 3 : 0;
+
+---------------------------------------------------------------------------------------------
+
+Truty와 Falsy
+    Truty는 말 그대로 True 같은 것
+    Falsy는 말 그대로 False(NaN, undefined, null, 0, "", false) 같은 것
+
+    if(true) = true
+    if({}) = true
+    if([]) = true
+    if("0") = true
+    if("false") = true
+    if(-Infinity) = true
+
+* 중요한 것은 언제 사용하느냐 => 값이 있는지 없는지 검사하기 위해 사용
+
+---------------------------------------------------------------------------------------------
+
+Early return
+    로직이 짧은 경우에는 굉장히 가독성이 좋은 코드
+    하지만 로직(코드)가 길다면?
+        탈출, 종료문이 많다는 것 = 분기점이 많다는 것 => 종료점이 많기 때문에 가독성이 좋지않음
+
+   ex) if(!a) return;
+---------------------------------------------------------------------------------------------
+
+비구조화 할당 (=구조분해할당)
+
+    비구조화할당은 배열이나 객체의 속성을 해체하여 그 값은 개별 변수에 담을 수 있게 하는 표현식
+
+    ex in 객체)
+    const juram = {
+        name: "Juram",
+        age: 20,
+        height: 170,
+    };
+
+    // const age = Juram.age;
+    // const height = Juram['height'];
+
+    const {age:juramAge, height} = Juram;       // 이름 지어준거
+    console.log(juramAge, height);      // 20, 170
+
+  * 변수명 중복과 가독성 있는 변수명을 위하여 별칭을 지어준다.
+
+    ex in 배열)
+    const arr = ["seongyong", "taegi"];
+    const [seongyongName, taegiName] = arr;
+
+    인덱스에 맞는 데이터가 변수로서 할당
+    console.log(seongyongName, taegiName);
+
+    const arr = [ {...}, {...} ];
+    const [obj1, obj2] = arr;
+
+    const {objName, obj1Height} = obj1;

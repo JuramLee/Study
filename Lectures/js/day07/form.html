@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+</head>
+<body>
+    <form action="#">
+        <p><input name="user_email"></p>
+        <p><input name="user_password"></p>
+        <button>로그인</button>
+    </form>
+</body>
+
+<script>
+    const form = document.getElementsByTagName('form')[0];      // form이벤트가 오도록 addEventListener를 사용
+
+    const onLogin = (e) => {
+        // e.preventDefault();
+        const emailInput = document.querySelector('[name="user_email"]');   // 속성선택자
+        const pwInput = document.querySelector('[name="user_password"]');
+        console.log(emailInput.value, pwInput.value);
+    }
+
+    form.addEventListener('submit', onLogin);
+</script>
+</html>

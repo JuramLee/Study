@@ -1,0 +1,128 @@
+DOM API 
+    DOM (Document Object Model 문서 객체 모델)
+    흔히 HTML에서 사용하는 div, span, input과 같은 요소들을 DOM이라고 한다.
+
+    API (Application Programming Interface)
+    응용 프로그램(소프트웨어) 사이에서 통신에 사용되는 언어와 메세지를 이야기한다.
+
+---------------------------------------------------------------------------------------------------
+
+DOM selector
+
+    1. document.getElementById(); 
+    2. document.getElementsByClassName();
+
+            ex)
+            <ul id="menu">
+                <li class="menu-item"</li>
+                <li class="menu-item"</li>
+                <li class="menu-item"</li>
+                <li class="menu-item"</li>
+            </ul>
+
+            const $menu = document.getElementById("menu");
+            console.log($menu);     // <ul></ul>
+
+            const $menuItem = document.getElementsByClassName("menu-item");
+            console.log($menuItem);         // [<li>, <li>, <li>, <li>];    -> 배열에 담아 리턴
+            console.log($menuItem[0]);      // 하나의 값에 접근하기 위해선 index로 접근
+            console.log($menuItem.length);  // 4
+
+    3. document.querySelector();                => 인자로 CSS선택자를 전달 받음
+    4. document.querySelectorAll();             => 인자로 CSS선택자를 전달 받음
+
+            ex)
+            document.querySelector("#menu");
+            document.querySelector(".menu-item");       // 같은 class가 여러개면 가장 먼저 발견한 아이템 리턴 
+            document.querySelectorAll(".menu-item");    // 모든 값을 배열에 담아 리턴 
+
+    5. document.getElementsByTagName();     // 모든 값을 배열에 담아 리턴 
+    6. document.getElementsByName();        // 모든 값을 배열에 담아 리턴 
+
+---------------------------------------------------------------------------------------------------
+
+Properties (속성) 자바스크립트로 html의 properties를 바꿀 수 있다.
+    
+    자주 사용하는 속성
+        value (보통 input값을 가져올때)
+        innerText
+        innderHTML
+        style
+        classList
+        onclick
+        onchange
+        onmouseover
+        onmouseleave
+        onKeydown
+
+---------------------------------------------------------------------------------------------------
+
+Attributes (속성)
+    setAttribute("속성명","속성값");    - 설정
+    getAttribute("속성명");             - 조회
+    removeAttribute("속성명");          - 삭제
+
+---------------------------------------------------------------------------------------------------
+
+addEventListener
+    addEventListener는 이벤트를 등록하는 가장 권장되는 방식
+    이 방식을 이용하면 하나의 요소에 여러개의 이벤ㅌ]트 핸들러를 등록할 수 있음
+
+    ex)
+    요소(|| window).addEventListener("이벤트명", 콜백함수, options)
+    document.getElementById("juram").addEventListener("click", ()=>{...}, true);
+   *options(캡쳐링 유무)의 경우 default가 false이므로 false일 경우는 생략
+
+    자주 사용하는 이벤트명
+        click : 요소를 클릭했을 떄
+        mouseover : 요소에 마우스를 올렸을 때
+        mouseleave : 요소에서 마우스가 떠났을 때
+        mousedown : 요소에서 마우스를 누르고 있는 상태
+        mouseup : 요소에서 마우스를 눌렀다가 뗀 상태, 단 뗐을 때 마우스 위치가 요소 위에 있어야함
+        mousemove : 마우스가 움직일 때마다
+        mousewheal : 마우스 휠이 이동되었을 때
+        focus : 활성화 되어있을 때
+        blur : 활성화에서 비활성화가 되었을 때(focus에서 벗어났을 때)
+        keypress : 키를 누른 순간
+        keyup : 키를 누르고 있다가 뗀 순간
+        Keydown : 키를 누른 상태
+        change : form field의 속성이 변경되었을 때
+            *form field => input, select, button
+
+      -- window, body(왠만하면 상위에 거는 이벤트, 반드시는 아님) --
+        load : 웹페이지가 켜졌을 때
+      * resize : 웹페이지의 사이즈가 조정되었을 때, * 반응형 웹에서 굉장히 중요
+        scroll : 스크롤 바의 움직임이 생겼을 때, 스크롤 할 때
+        unload : 웹페이지가 닫혔을 때
+
+---------------------------------------------------------------------------------------------------
+
+    캡쳐링, 버블링
+
+        버블링 : 한 요소에 이벤트가 발생되면, 이벤트 핸들러가 작동, 이어서 부모 요소의 핸들러가 동작
+                즉, 하위 요소의 이벤트가 부모 요소의 이벤트로 전파되는 것을 의미
+
+        캡쳐링 : 버블링의 반대. 즉, 상위 요소의 이벤트가 하위 요소로 전파되는 것을 의미
+                캡쳐링의 기본 옵션은 false지만 addEventListener의 옵션으로 true로 만들어 줄 수 있다
+
+
+   *이벤트 전파 방지
+        event.preventDefault(); => html에서 a태그나 form태그는 고유의 동작이 있음 
+                                   페이지 이동하거나, form 데이터를 전송하는 등의 기본 동작의 성질을 막는 역할
+                                   ex) form의 특징 -> submit이 되면? action이 실행됨
+            
+        event.stopPropagation(); => 이벤트가 상위 요소에 전달되지 않게 막아주는 역할
+
+---------------------------------------------------------------------------------------------------
+
+classList
+    해당 요소가 가지고 있는 클래스의 목록 => 배열
+
+    classList.contain("클래스명");
+        해당 class가 있는지 없는지 여부를 판단하여 Boolean 형태로 반환
+    
+    classList.add("클래스명");
+        해당 요소에 인자로 전달된 클래스를 추가한다.
+
+    classList.remove("클래스명");
+        해당 요소에 인자로 전달된 클래스를 제거한다.        //empty();도 있다

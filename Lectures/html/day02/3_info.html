@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>info</title>
+</head>
+<body>
+    <!-- conatiner -->
+    <div>
+        <!-- hobby -->
+        <div>
+            취미:
+            <select>
+                <option value="0">농구</option>
+                <option value="1">자전거</option>
+                <option value="2">풋살</option>
+            </select>
+        </div>
+        <!-- gender -->
+        <div>
+            <!-- type="radio"의 핵심은 name-->
+            <!-- label 이라는 것은 id와 for 속성이 같은 것을 하나로 묶어주는 것-->
+            성별:
+            <input type="radio" name="gender" value="0" id="female"/> <label for="female">여성</label>
+            <input type="radio" name="gender" value="1"/> 남성
+            <input type="radio" name="gender" value="2"/> 비공개
+        </div>
+        <!-- family -->
+        <div>
+            <!-- checkbox는 radio와 다르게 여러개 선택이 가능 -->
+            가족 관계:
+            <input type="checkbox" value="0"/> 본인
+            <input type="checkbox" value="1"/> 부모
+            <input type="checkbox" value="2"/> 형제
+            <input type="checkbox" value="3"/> 지인
+        </div>
+    </div>
+</body>
+</html>

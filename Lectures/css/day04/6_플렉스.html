@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIMSEONGYONG</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #Wrapper {
+            height: 100vh;
+            background-color: #3AA5DD;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .flexAlignCenter {
+            display: flex;
+            align-items: center;
+        }
+
+        .flexCenter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header {
+            height: 3rem;
+            padding: 0 2rem;
+            justify-content: space-around;
+            justify-content: space-evenly;
+            justify-content: space-between;
+            /* 
+            부모 기준 간격을 일정하게
+
+            space-betewwn: 요소들 사이에 여백
+            space-arround: 요소들 주변 동일 여백
+            space-envely: 요소들 주변 일정 여백
+
+            */
+        }
+
+        #container {
+            height: calc(100vh - 3rem);
+            font-size: 4rem;
+            box-sizing: border-box;
+            padding-bottom: 3rem;
+        }
+
+        ul {
+            display: flex;
+            list-style: none;
+        }
+
+        ul>li {
+            margin: 0 8px;
+            cursor: pointer;
+        }
+
+        ul>li:hover {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="Wrapper">
+        <header class="flexAlignCenter">
+            <span>LOGO</span>
+            <div>SEARCH</div>
+            <ul>
+                <li>sign-in</li>
+                <li>sign-up</li>
+            </ul>
+        </header>
+        <div id="container" class="flexCenter">
+            SeongYong
+        </div>
+    </div>
+</body>
+
+</html>

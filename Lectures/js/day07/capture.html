@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capturing</title>
+</head>
+
+<style>
+    body * {
+        margin: 10px;
+        border: 1px solid blue;
+    }
+</style>
+<body>
+    <form >
+        FORM
+    <div>
+        DIV
+        <p>P</p>
+    </div>
+</form>
+</body>
+<script>
+    const els = document.querySelectorAll('*');
+    for ( let el of els ) {
+        el.addEventListener('click', function(){
+            // el.stopPropagation;
+            alert(el.tagName);
+        }, true)        // false는 생략가능
+    }
+</script>
+</html>

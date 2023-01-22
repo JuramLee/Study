@@ -1,0 +1,156 @@
+
+    배열 객체는 왜 const로 만들었는데도 값 수정이 가능하지?
+    자바스크립트의 메모리 저장 방식
+
+    힙( =힙 메모리 ) : 값 할당이 이루어지는 곳
+    콜 스택 : 힙에 저장된 객체를 참조하여 호출된 함수의 정보를 저장하고 실행하는 곳
+    (값 저장 뿐 아니라 자바스크립트의 함수가 실제로 실행되게.. -> 실행 context할 때 함)
+    
+
+    힙에는 객체(오브젝트)가 저장되고
+    콜 스택에는 원시 타입 데이터가 저장됨
+
+    1. 원시 타입 데이터 저장 방식
+        - 원시 타입이므로 콜스택에 값이 바로 저장
+        - 변수에는 콜스택(렉시컬 환경) 메모리 주소값이 저장
+
+    2. 참조 타입 데이터 저장 방식
+        - 배열, 객체, 함수 등은 참조 타입이므로 메모리 힙에 저장된다.
+        - 참조타입 데이터가 저장된 메모리의 주소 값을 콜스택에 저장
+        - 변수에는 메모리 힙의 주소값이 저장
+
+    let obj = {}
+    let obj2 = obj2
+    obj === obj2 => true
+
+    얕은 복사
+    값을 복사하여 할당했을 때에 같은 메모리 주소를 가리키는 것
+
+    깊은 복사(원시타입과 같이 데이터 저장하는 것)
+    얕은 복사와는 달리 주소를 복사하여 공유하는 것이 아니라 아예 새로운 주소에 값을 저장하고 해당 주소를 가리키는 것
+
+
+-------------------------------------------------------------------------------------------------
+
+    Number
+        new Number(123);
+        123;
+
+        new Number("str");
+        NaN;
+
+        Number.MAX_VALUE  // 자바스크립트에서 사용 가능한 수 중 가장 큰 숫자, (1.7e+308), INFINITY
+        Number.MIN_VALUE  // 자바스크립트에서 사용 가능한 수 중 가장 작은 숫자, 0에 가장 가까움
+        Number.isFinit() : boolean 유한수인지 아닌지
+        Number.prototype.toString(3) : 숫자를 넣으면 문자열로 변환
+
+  * Math
+
+      * Math.max(a,b,...,z) 최댓값
+      * Math.min(a,b,...,z) 최솟값
+        Math.random() 0 ~ 1 사이의 무작위 숫자 반환
+      * Math.round(a) 소수점 첫번째 자리에서 반올림
+      * Math.floor(a) 소수점 이하 버림
+      * Math.ceil(a) 소수점 이하 올림
+      * Math.abs(a) a의 절대값
+        Math.sqrt(a) a의 제곱근
+        Math.cbrt(a) a의 세제곱근
+        Math.log(a) a의 자연로그
+        ...
+
+    String
+        String.length() : 문자열 길이
+        String.prototype.charAt(index) : 해당 index의 값
+                        .concat() : 문자열 합치기
+                        .indexOf(a) : a 값의 index값
+                        .replace('a', 'b') : a라는 문자를 b로 바꾸는 것
+                        .replace(정규 표현식 기능, 바꿀 문자)                        
+                             ex) "Hello".replace("e", "o");  //Hollo
+                        .toLowerCase() : 전부 소문자로
+                        .toUpperCase() : 전부 대문자로
+                        .split() : 쪼개기
+                        .repeat(n) : 반복
+
+        String.prototype.charAt
+                    ex) const a = Hello;
+                    "Hello".chatAt(0); //0번째 있는 글자가 뭐야? => H
+                    a.charAt(0); => H
+
+        String.prototype.concat
+        String.prototype.indexOf
+                           ...
+
+        
+   * Date
+        Date 생성자 함수는 날짜와 시간을 가지는 인스턴스를 생성하는 빌트인 함수
+        -> 로컬 컴퓨터 환경 시간 기준( 따라서 각 컴퓨터마다 시간이 다를 수 있다 ) //momentJS, dayJS
+
+        new Date()
+        현재 날짜와 시간을 가지는 인스턴스
+        만약 () 파라미터로 올바른 포멧의 시간을 전달하면 해당 시간의 인스턴스 생성
+
+        const date = new Date();
+        console.log(date); // Thu May 16 2022 17:16:13 ... (한국 표준시)
+
+        const date = new Date(2022, 11); 
+        console.log(date); // 요일 11월 30 2022 00:00:00
+
+        (2022, 11, 15, 18, 30, 20) //요일, 12월 15 2022 18:30:20
+        ("2022/12/15/19:30:20")도 정상 작동
+
+
+-------------------------------------------------------------------------------------------------
+
+나머지 매개 변수
+    ex) ...rest
+
+    function a(number, ...rest){
+        return {number, rest}; => 키랑 값이 같으면 하나만 써도됨(number: number / rest: rest)
+    }
+
+    console.log(a(5, 4, 3, 2, 1));
+
+-------------------------------------------------------------------------------------------------
+
+정규표현식(Regular Expression) => rgexp
+
+    문자열에서 특정 내용을 찾거나 대체 또는 발췌하는데 사용
+    주로 사용하는 것은 유효성 검사
+    ex) 이메일 형식, 핸드폰번호'-'를 넣어주세요, 비밀번호에 대소문자 및 특수문자를 넣어주세요
+
+    https://regexr.com/         // 규칙 맞게 잘 썼나 확인하는 사이트
+
+
+    규칙
+    i (ignoreCase) : 대소문자 구별x
+    g (Global) : 모든 문자 검사
+    m (Multi Line) : 문자열의 행이 바뀌더라도 검색을 계속한다
+
+    ex)
+        const str = "This is a pen";
+        const rgexp = /is/ig;
+
+        rgexp.test(str) // boolean => true
+
+
+    1. 특정 단어로 시작
+         const rgexp = /^http/;
+
+    2. 특정단어로 끝나는지
+        const rgexp = /html$/;
+
+    3. 숫자인지
+        const rgexp = /[0-9]/;      숫자인지
+        const rgexp = /[^a-z]/;     숫자가 아닌 알파벳인지
+
+
+
+
+    4. 메일 주소 형식인지
+        const regexr = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+
+    5. 핸드폰 번호 형식인지
+        const rgexp = /^\d{3}-\d{3,4}-\d{4}$/;
+
+    6. 특수문자 포함인지
+        const rgexp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;

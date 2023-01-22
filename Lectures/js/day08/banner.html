@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+            /*glboal*/
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            /*common*/
+            .flex-center {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /*banner*/
+            .banner-box {
+                width: 1080px;
+                border: 1px solid #000;
+                margin: 1rem auto;
+                overflow: hidden;
+            }
+
+            .banner-item {
+                min-width: 100%;
+                height: 300px;
+                background-color: red;
+                font-size: 2rem;
+                font-weight: bold;
+                color: #fff;
+            }
+
+            .banner-list > li:nth-of-type(2) {
+                background-color: blue;
+            }
+
+            .banner-list > li:nth-of-type(3) {
+                background-color: green;
+            }
+
+            /*shade*/
+            #shade-banner > ul {
+                width: 100%;
+                height: 300px;
+                position: relative;
+            }
+
+            #shade-banner > ul > li {
+                position: absolute;
+                transition: opacity 2s;
+            }
+
+            #shade-banner > ul > li:nth-of-type(1) {
+                z-index: 300;
+            }
+
+            #shade-banner > ul > li:nth-of-type(2) {
+                z-index: 200;
+            }
+
+            #shade-banner > ul > li:nth-of-type(3) {
+                z-index: 100;
+            }
+
+            /*sldie*/
+            #slide-banner > ul {
+                width: 100%;
+                display: flex;
+                transition: transform 2s ease-in-out;
+            }
+</style>
+<body>
+    <h2>Banner</h2>
+    <!-- shade banner -->
+    <div id="shade-banner" class="banner-box">
+        <ul class="banner-list">
+            <li class="banner-item flex-center">1</li>
+            <li class="banner-item flex-center">2</li>
+            <li class="banner-item flex-center">3</li>
+        </ul>
+        <div>
+            <button class="shade-prev-btn">prev</button>
+            <button class="shade-next-btn">next</button>
+        </div>
+    </div>
+
+    <!-- slide banner -->
+    <div id="slide-banner" class="banner-box">
+        <ul class="banner-list">
+            <li class="banner-item flex-center">1</li>
+            <li class="banner-item flex-center">2</li>
+            <li class="banner-item flex-center">3</li>
+        </ul>
+        <div>
+            <button class="slide-prev-btn">prev</button>
+            <button class="slide-next-btn">next</button>
+        </div>
+    </div>
+
+    <script>
+        // shade
+        let shadeBannerIndex = 0;
+        const $shadeBanner = document.querySelectorAll('#shade-banner > ul > li');
+        const $shadeBannerPrevBtn = document.querySelector('.shade-prev-btn');
+        const $shadeBannerNextBtn = document.querySelector('.shade-next-btn');
+
+        function prevShadeBanner() {
+            if(shadeBannerIndex <= 0) {
+                shadeBannerIndex - $shadeBanner.length -1;
+            } else {
+                shadeBannerIndex--;
+            }
+
+            for(let item of $shadeBanner) {
+                item.style.opacity = 0;
+            }
+            /*
+            $shadeBanner.forEach((item, index, arr) => {
+                item.style.opacity = 0;
+            })*/
+
+            $shadeBanner[shadeBannerIndex].style.opacity = 1;
+        }
+
+        function nextShadeBanner() {
+            if(shadeBannerIndex >= $shadeBanner.length -1) {
+                shadeBannerIndex = 0;
+            } else {
+                shadeBannerIndex++;
+            }
+
+            for(let item of $shadeBanner) {
+                item.style.opacity = 0;
+            }
+            /*
+            $shadeBanner.forEach((item, index, arr) => {
+                item.style.opacity = 0;
+            })*/
+
+            $shadeBanner[shadeBannerIndex].style.opacity = 1;
+        
+        }
+
+        $shadeBannerPrevBtn.addEventListener('click', prevShadeBanner);
+        $shadeBannerNextBtn.addEventListener('click', nextShadeBanner);
+
+        /*
+        무한 슬라이드 배너 cloneNode
+        자동 슬라이드 배너 setInterval      // 비동기함수
+        */
+
+        // slideBanner
+        let slideBannerIndex = 0;
+        const $slideBanner = document.querySelector('#slide-banner > ul');
+        const $slideBannerItem = document.querySelectorAll('#slide-banner > ul > li');     // 마지막 인덱스 찾기위해 가져옴
+        const $slideBannerPrevBtn = document.querySelector('.slide-prev-btn');
+        const $slideBannerNextBtn = document.querySelector('.slide-next-btn');
+        const $slideBannerWidth = $slideBanner.offsetwidth;
+
+        function prevSlideBanner() {
+            if(slideBannerIndex <= 0) {
+                slideBannerIndex = $slideBannerItem.length -1;
+            } else {
+                slideBannerIndex--;
+            }
+
+            $slideBanner.style.transform = `translateX(-${$slideBannerWidth * slideBannerIndex}px)`;
+            
+        }
+        function nextSlideBanner() {
+            if(slideBannerIndex <= $slideBannerItem.length -1) {
+                slideBannerIndex = 0;
+            } else {
+                slideBannerIndex++;
+            }
+
+            $slideBanner.style.transform = `translateX(-${$slideBannerWidth * slideBannerIndex}px)`;
+        }
+
+        $slideBannerPrevBtn.addEventListener('click', prevSlideBanner);
+        $slideBannerNextBtn.addEventListener('click', nextSlideBanner);
+    </script>
+
+
+</body>
+</html>

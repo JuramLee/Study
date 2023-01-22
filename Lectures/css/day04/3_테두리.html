@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테두리</title>
+    <style>
+        div {
+            width: 300px;
+            height: 300px;
+            background-color: #000;
+            margin: 16px;
+        }
+
+        .border {
+            border: 1px solid #f00;
+            border: 1px dashed #f00;
+            border: 1px dotted #f00;
+            border: 1px double #f00;
+        }
+
+        .radius {
+            border-radius: 14px 6px 81px 10px / 12px 6px 28px 10px;
+            border-radius: 50%;
+            border-radius: 16px;
+            border-radius: 16px / 8px;
+            border-radius: 16px 0 0 16px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #000;
+        }
+
+        th {
+            background-color: #d9d9d9;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="border"></div>
+    <div class="radius"></div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>조회수</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>안녕하세요</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>안녕하세요~</td>
+                <td>2</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
