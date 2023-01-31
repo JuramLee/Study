@@ -1,0 +1,145 @@
+/........................................................................./
+
+
+src의 구조
+    App.css : App.js에 참조되어 있는 기본 css파일 (지워도 무방)
+        * index.js, app.js는 react 구조상 index.html을 제외한 최상위 컴포넌트. App.css는 모든 컴포넌트에 적용
+          그러나 react에서 가장 많이 사용하는 것은 일반적인 css가 아닌 js안에 css를 작성할 수 있는 CSS-in-JS를 활용
+          따라서 삭제해줘도 무방 (CSS-in-JS에 전역 스타일링 기능이 따로 탑재되어있기 때문)
+    App.js : routing, 라이브러리의 provider(설정 파일들을 위치시킨다)
+    App.test.js : test코드의 샘플
+    index.css : App.css와 동일
+    index.js : 최상위 컴포넌트의 index.html의 root에 App.js를 rendering(전달)시켜주는 역할
+    reportWebVitals.js : 프론트엔드 성능 체크하는 기능, 체크x (라이트하우스 체크o)
+    setupTests.js : testCode 라이브러리의 전역 참조 설정
+
+    .....................................................................
+
+react-router-dom
+
+    router : 네트워크 데이터 전송 = 소포
+    react에서 dom(컴포넌트)을 전달하기 위해 사용하는 소포
+    경로 설정에 관한 라이브러리
+
+    ==> url이 변화함에 따라 다른 컴포넌트를 index.html에 보여주는 역할
+        정확하게는 app.js에 보여주는거고 app.ks를 index.js가 index.html에 전달
+
+    npm i react-router-dom // 안정화되어 있는 최신 버전
+    npm i react-router-dom@버전 // 원하는 버전 골라서 설치
+
+    .....................................................................
+
+css-in-js
+	js 파일 안에 css를 정의 가능
+	css를 모듈단위로 나누어 관리할 수 있다는 장점
+	하나의 js파일 안에 css를 관리할 수 있다는 장점
+
+	많은 개발자들이 사용하고 있고 유지보수가 쉽다는 점, 가독성이 굉장히 좋아짐
+
+	따라서, reactJS나 vueJS와 같은 js 프론트엔드 프레임워크를
+	사용할 경우는 scss나 css보다는 css-in-js를 많이 활용
+
+    .....................................................................
+
+기본경로 설정
+    package.json과 동일한 depth에서 jsconfig.json 파일 만들어서 아래처럼 쓴다.
+    그러면 경로의 시작을 baseUrl에 적힌데로 지정할 수 있다
+    {
+        "compilerOptions": {
+            "baseUrl": "./src"
+        },
+        "include": ["src"]
+    }
+
+
+/........................................................................./
+
+
+ISSUE TRACKER (ERROR 정리)
+    - NOT DEFINED : 컴포넌트가 import 되지 않았을 때 나오는 에러. 위치 찾아서 import 시켜주면 해결 가능
+
+    .....................................................................
+
+Library 설치 확인
+    package.json에서 보면 확인 가능.
+    npm i @@@@ (설치 명령어)
+
+    .....................................................................
+
+리액트 폴더 구조
+    entry file(보통 index.js파일)
+
+
+/........................................................................./
+
+
+export 차이
+    function A() {                              export function A() {
+        ...                                         ...
+    }                                           }
+    
+    export default A;
+
+    import A from './...'                       import { B } from './...'
+    이름 맘대로 지어도됨(export default값)        key값이라 함수명 그대로 가지고와야함
+
+    .....................................................................
+
+컴포넌트 파일명은 대문자로 시작해야한다.
+    나중에 Hook함수 쓸 때 랜더링함수(컴포넌트)라는 걸 앞에 대문자여야지만 인지가능
+
+    .....................................................................
+
+props (속성)
+    데이터 보낼 때
+        상위 컴포넌트에서 하위 컴포넌트로 값을 전달해주는 기능. 키랑 값으로 전달
+            ex. <TodoCard todo={todo} example={'test'} (여러개도 가능)/> TodoCard에 todo라는 이름으로 todo데이터를 전달할거야
+
+    데이터 받을 때
+        하나만 넘길 때: 속성으로 넘긴 걸 매개변수로 받을 수 있다.
+            ex. function TodoCard(props) { 
+                    // props로 todo와 example의 키로 받아온다
+                    console.log(props) // todo와 example 모두 데이터가 나옴
+                    ... 
+                };
+
+        조금 넘길 때: 구조분해 할당이지만 매개변수에서 바로 적용
+            ex. function TodoCard({todo, example}) { 
+                    // props.todo props.example로 받지 않고 todo와 example의 키로 받아온다
+                    console.log(todo, example) // props.todo, props.example과 동일한 데이터
+                    ... 
+                };
+        많이 넘길 때: 구조분해 할당이지만 함수 내 상단에서 변수로 선언해서 사용
+            ex. function TodoCard(props) { 
+                    // props의 구조분해할당을 상단에 미리 해주고 키값으로만 사용
+                    const { todo, example } = props;
+                    console.log(todo, example) // todo와 example 모두 데이터가 나옴
+                    ... 
+                };
+    .....................................................................
+
+React에서의 반복문
+    return 안에는 for문 사용 불가. 배열을 반복시키기 위해서는 map()을 사용해라
+    
+    .....................................................................
+
+Styled component
+    import styled from 'styled-components';
+    const Wrapper = styled.태그이름`
+        CSS 속성들
+        ...
+    `;
+
+    const Header = styled.header`
+        background-color: #f5f5f5;
+        ...
+        // & 나 자신 선택자
+        & > div {
+            
+        }
+    `;
+
+    themeProvider를 이용하여 값을 사용할 땐 콜백함수 인자(props)로 theme 속성이 전달된다
+    (정확하게는 props라서 구조분해 할당 혹은 props.theme으로 해야함)
+
+    styled component의 props로 전달된 값은 ${() =>} 화살표 함수로 받는다.
