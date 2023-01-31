@@ -28,7 +28,9 @@ for (let i = 0 ; i < musicListData.length ; i++){
   const $coverLi = document.createElement('img');
   $playListItem[i].appendChild($coverLi);
   $playListItem[i].innerHTML = `<img src="${musicListData[i].src}" alt="아이유 노래">`
+  // $playListItem[i].addEventListener('click', selectedMusic);
 }
+console.log($playListItem);
 
 
 let playIndex = 0;
@@ -43,7 +45,15 @@ const $playBtn = document.querySelector('.play_btn_group > button:first-child');
 const $stopBtn = document.querySelector('.play_btn_group > button:last-child');
 const $disk = document.querySelector('.disk');
 
-
+function selectedMusic() {
+  selected = true;
+  $playListItem[playIndex].classList.add('play');
+  $current.setAttribute('style', `background-color: ${musicListData[playIndex].color[0]}`);
+  $main.setAttribute('style', `background: linear-gradient(120deg, ${musicListData[playIndex].color[0]}, ${musicListData[playIndex].color[1]})`);
+  if(playStatus == true) {
+    $main.children[0].src = musicListData[playIndex].src;
+  } else $main.children[0].src = "";
+}
 
 function prevPlay() {
   if (playIndex <= 0) {
@@ -54,14 +64,7 @@ function prevPlay() {
     $playListItem[i].classList.remove('play');
   }
 
-  selected = true;
-  $playListItem[playIndex].classList.add('play');
-  $current.setAttribute('style', `background-color: ${musicListData[playIndex].color[0]}`);
-  $main.setAttribute('style', `background: linear-gradient(120deg, ${musicListData[playIndex].color[0]}, ${musicListData[playIndex].color[1]})`);
-  if(playStatus == true) {
-    $main.children[0].src = musicListData[playIndex].src;
-  } else $main.children[0].src = "";
-  
+  selectedMusic();
 }
 
 function nextPlay() {
@@ -72,15 +75,8 @@ function nextPlay() {
   for(let i = 0 ; i < musicListData.length ; i++) {
     $playListItem[i].classList.remove('play');
   }
-  
-  selected = true;
-  $playListItem[playIndex].classList.add('play');
-  $current.setAttribute('style', `background-color: ${musicListData[playIndex].color[0]}`);
-  $main.setAttribute('style', `background: linear-gradient(120deg, ${musicListData[playIndex].color[0]}, ${musicListData[playIndex].color[1]})`);
-  if(playStatus == true) {
-    $main.children[0].src = musicListData[playIndex].src;
-  } else $main.children[0].src = "";
 
+  selectedMusic();
 }
 
 $prevBtn.addEventListener('click', prevPlay);
@@ -107,7 +103,9 @@ function stopMusic() {
 $playBtn.addEventListener('click', playMusic);
 $stopBtn.addEventListener('click', stopMusic);
 
-
+function imgPlay() {
+  
+}
 
 
 

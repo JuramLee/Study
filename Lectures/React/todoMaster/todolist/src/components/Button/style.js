@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 const variantCSS = {
 	primary: css`
-		background: ${(theme) => theme.PALETTE.primary[300]};
+		background: ${({theme}) => theme.PALETTE.primary[300]};
 		color: ${({theme}) => theme.PALETTE.fontColor };
 	`,
 	"primary-reverse": css`
@@ -53,9 +53,9 @@ const sizeCSS = {
 };
 
 export const Button = styled.button`
-	${(variant) => variantCSS[variant] }
-	${(shape) => shapeCSS[shape] }
-	${(size) => sizeCSS[size]}
+	${({variant}) => variantCSS[variant] }
+	${({shape}) => shapeCSS[shape] }
+	${({size}) => sizeCSS[size]}
 	cursor: pointer;
 	border: none;
 	:hover {
@@ -63,11 +63,11 @@ export const Button = styled.button`
 	}
 `;
 
-const S = {
-	Button,
-	variantCSS,
-	shapeCSS,
-	sizeCSS,
-};
+// const S = {
+// 	Button,
+// 	variantCSS,
+// 	shapeCSS,
+// 	sizeCSS,
+// };
 
-export default S;
+// export default S;
