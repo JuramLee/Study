@@ -1,4 +1,5 @@
-import { Button } from 'components/Button/style';
+// import Button from 'components/Button/Button';
+import Button from 'components/Button/Button';
 import * as S from './style'
 
 function LoginForm() {
@@ -13,9 +14,10 @@ function LoginForm() {
                 {/* <div oncli></div> */}
                 <span>비밀번호</span>
             </S.InputBox>
-            <Button variant={'primary'} size={'full'}>
+            <Button variant={'primary'} size={'full'}>로그인</Button>
+            {/* <Button variant={'primary'} size={'full'}>
                 로그인
-            </Button>
+            </Button> */}
         </S.Form>
     );
 }
