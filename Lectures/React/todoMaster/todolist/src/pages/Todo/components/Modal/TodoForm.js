@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import { flexAlignCenter, flexCenter, ModalBackground } from "styles/common";
 
-function TodoFormModal() {
+function TodoFormModal({showToastMessage}) {
+  const onClickAddTodoBtn = (e) => {
+    e.preventDefault();
+    showToastMessage();
+  };
+
   return (
     <S.Wrapper>
       <S.Form>
@@ -13,7 +18,8 @@ function TodoFormModal() {
           <input placeholder="제목을 입력해주세요" />
           <textarea placeholder="할 일 내용을 입력해주세요"></textarea>
         </S.Content>
-        <S.Button>ADD</S.Button>
+        <S.Button onClick={onClickAddTodoBtn}>ADD</S.Button>
+        {/* <S.Button onClick={() => showToastMessage()}>ADD</S.Button> */}
       </S.Form>
     </S.Wrapper>
   );
