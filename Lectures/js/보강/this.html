@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This</title>
+</head>
+<body>
+    <script>
+        console.log(this); // window(브라우저, html) 가장 최상위 요소
+
+        function thisPrint() {
+            console.log(this); // window
+
+            const method = {
+                print() {
+                    console.log(this);
+                },
+            };
+        }
+
+        thisPrint();
+        method.print(); // method
+
+        class thisClass{
+            print() {
+                console.log(this); // thisClass
+            }
+        }
+
+        thisClass.print();
+
+        // 경우에 따라 바인딩이 다른 경우
+
+        const method2 = {
+            print2: () => {
+                console.log(this); // window
+                // 화살표 함수는 this의 바인딩 방식이 다름
+                // this를 사용해야하는 경우 화살표 함수를 사용해서는 안됨
+            },
+
+            print3: function() {
+                console.log(this); // method2
+            }
+        }
+
+        /* new 
+        해당 함수를 이용하여 새로운 인스턴스(객체)를 만들어 내겠다*/
+
+        // 새로운 인스턴스가 생성되어 값을 공유하지 않고 각자 고유의 주람 조이 객체가 만들어졌다
+
+        function thisFunc(이름) {
+            this.name = 이름;
+            console.log(this);
+
+            this.logName = function (age) {
+                console.log(this.name, age);
+            }
+        }
+        const juram = new thisFunc('주람');
+        const joy = new thisFunc('조이');
+
+        console.log(juram.name); // 주람
+        console.log(joy.name); // 조이
+
+        // apply, call, bind
+        // this를 맘대로 조작할 수 있는 함수
+        // call, apply는 첫 번째 인자로 this에 set하고 싶은 객체를 넘겨줄 수 있음
+
+
+        juram.logName.call(joy, 20); // joy this.name
+        juram.logName.apply({name: 주람}, [20]); // joy this.name
+
+    </script>
+/*
+this.js 라면 console.log(this).하면 window도 아닌  {}이 뜬다
+결국 누가 해당 함수를 호출했는가
+button onClick=@@ 했다면 button이 호출한거니 this는 button이 나온다
+*/
+</body>
+</html>
