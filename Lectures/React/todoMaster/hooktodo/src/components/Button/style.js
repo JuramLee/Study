@@ -61,6 +61,12 @@ export const Button = styled.button`
 	:hover {
 		opacity: 0.8;
 	}
+	
+	:disabled{
+		background-color: '#d9d9d9';
+		color: '#333';
+		opacity: 0.8;
+	}
 `;
 
 // const S = {

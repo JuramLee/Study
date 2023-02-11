@@ -2,32 +2,51 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faBan, faPen } from "@fortawesome/free-solid-svg-icons";
 import { flexAlignCenter, flexCenter } from "styles/common";
+import { useState } from "react";
+import useInput from "hooks/useInput";
 
 function TodoCard(props) {
-	// function TodoCard({example, todo}) {	
-	// props의 데이터가 적을 때는 매개변수에 구조분해할당
-	console.log('props', props);
-	console.log('example', props.example);
-	// 데이터가 많다면 컴포넌트 안에서 구조분해 할당으로 변수/상수 선언
+	// console.log('props', props);
+	// console.log('example', props.example);
 	const { todo } = props;
-	const { state, title, content } = todo; 	//위에 줄 없이 props.todo로 해도됨
+	const { id, state, title, content } = todo; 	//위에 줄 없이 props.todo로 해도됨
+
+  const [isTodoEdit, setIsTodoEdit] = useState(false);
+  const [newContent, onChangeNewContent] = useInput(content);
+  const { onEdit, onDelete } = props;
+
+
+  const onSetEditTrue = () => {
+    setIsTodoEdit(true)
+  }
+
+  const onClickTodoEditBtn = () => {
+    if(newContent === content) return setIsTodoEdit(false);
+    onEdit(id, newContent, state);
+    setIsTodoEdit(false);
+  }
+
+  const onClickTodoStateEditBtn = () => {
+    onEdit(id, content, !state);
+  }
+
 
 	return(
 		<S.Wrapper state={state}>
 			<S.Header>
-				<S.StateBox state={state}>
+				<S.StateBox state={state} onClick={onClickTodoStateEditBtn}>
 					<FontAwesomeIcon icon={faCheck} />
 				</S.StateBox>
 				<S.Title state={state}>
 					{title}
 					<>
-						<FontAwesomeIcon icon={faPen} />
-						<FontAwesomeIcon icon={faBan} />
+						<FontAwesomeIcon icon={faPen} onClick={isTodoEdit ? onClickTodoEditBtn : onSetEditTrue}/>
+						<FontAwesomeIcon icon={faBan} onClick={() => onDelete(id)}/>
 					</>
 				</S.Title>
 			</S.Header>
 			<S.Content state={state}>
-				{content}
+				{isTodoEdit ? <textarea value={newContent} onChange={onChangeNewContent}></textarea> : content}
 			</S.Content>
 			{/* <{todo.state ? '완료' : '미완료'}
 			<h2>{todo.title}</h2>

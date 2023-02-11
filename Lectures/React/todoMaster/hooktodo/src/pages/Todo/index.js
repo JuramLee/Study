@@ -5,6 +5,7 @@ import TodoList from "./components/List/TodoList";
 import TodoFormModal from "./components/Modal/TodoForm";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify";
+import { useState } from "react";
 // toast가 보여주는 기능, ToastContainer는 UI
 
 export const print = () => {
@@ -13,13 +14,22 @@ export const print = () => {
 
 function TodoPage() {
 
-  const onAddTodo = new Promise((resolve) => {
-    setTimeout(() => resolve('todo'), 3000);
-  });
+  // state
+  const [isOpenAddTodoModal, setIsOpenAddTodoModal] = useState(false);
+  const [todoList, setTodoList] = useState([
+    {
+      id: 1,
+      title: 'title1',
+      content: 'content1',
+      state: false,
+    }
+  ])
 
-  const showToastMessage = (e) => {
+    
+    // toast
+  const showAddTodoToastMessage = (title, content) => {
     // add버튼이 form태그라서 기본기능 막고 toast.promise띄운다
-    toast.promise(onAddTodo, {
+    toast.promise(handleAddTodo(title, content), {
       pending: "TODO LOADING",
       success: "TODO SUCCESS",
       error: "TODO ERROR",
@@ -27,22 +37,51 @@ function TodoPage() {
   };
 
 
+  const handleOpenTodoAddModal = () => {
+    setIsOpenAddTodoModal(true);
+  }
+  const handleCloseTodoAddModal = () => {
+    setIsOpenAddTodoModal(false);
+  }
 
+    // const onAddTodo = new Promise((resolve) => {
+    //   setTimeout(() => resolve('todo'), 3000);
+    // });
+  const handleAddTodo = (title, content) => {
+    return new Promise((resolve, reject) => {
+      if(!title || !content) {
+        return reject('need fulfilled')
+      }
 
+      setTimeout(() => {
+        const newTodo = {
+          id: Math.floor(Math.random() * 100000),
+          title,
+          content
+        };
+        resolve(newTodo)
+      }, 1000)
+    }).then((res) => {
+      // const newTodoList = [...todoList].push(res)
+      setTodoList([...todoList, res])
+      setIsOpenAddTodoModal(false)
+    })
+  }
 
     return (
         <>
-        <TodoFormModal showToastMessage={showToastMessage}/>
+        { isOpenAddTodoModal && <TodoFormModal showAddTodoToastMessage={showAddTodoToastMessage} 
+        onClose={handleCloseTodoAddModal}/>}
         <S.Wrapper>
             <S.Container>
             <S.Title>
                 List
             </S.Title>
             <S.Content>
-                <TodoList/>
+                <TodoList todoList={todoList} setTodoList={setTodoList}/>
             </S.Content>
             <S.ButtonBox>
-                <Button variant={'primary'} size={'full'}>
+                <Button variant={'primary'} size={'full'} onClick={handleOpenTodoAddModal}>
                     추가
                 </Button>
             </S.ButtonBox>

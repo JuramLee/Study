@@ -22,7 +22,7 @@ function HomePage() {
                 <S.LoginSelector mode={form} onClick={onFormChange}>Login</S.LoginSelector>
                 <S.SignUpSelector mode={form} onClick={onFormChange}>Sign</S.SignUpSelector>
             </S.Header>
-            {form === 'login' ? <LoginForm/> : <SignUpForm/>}
+            {form === 'login' ? <LoginForm/> : <SignUpForm setForm={setForm}/>}
             {/* <a href="/todo">일반 투두페이지로 이동</a>
             <Link to="/todo">라우터 투두페이지로 이동</Link> */}
         </S.Wrapper>
