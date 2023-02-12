@@ -44,7 +44,7 @@ function LoginForm() {
   return (
     <S.Form onSubmit={onLoginSubmit}>
       <S.InputBox>
-        <input placeholder="email" name='name' onChange={onChangeForm} />
+        <input placeholder="email" name='email' onChange={onChangeForm} />
         <span>이메일</span>
       </S.InputBox>
       <S.InputBox>

@@ -1,4 +1,4 @@
-const { useState } = require("react")
+import { useState } from 'react';
 
 // custom hook이라고 부름
 /*

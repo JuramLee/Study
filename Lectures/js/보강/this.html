@@ -72,6 +72,11 @@
         juram.logName.call(joy, 20); // joy this.name
         juram.logName.apply({name: 주람}, [20]); // joy this.name
 
+        const newJuram = juram.logName.bind(joy, 20); // joy 20 나오지만 실행하지 않음, 즉 실행하기 위해서는 변수에 담아줘야한다
+        newJuram(20); // 실행을 따로 진행해야 한다.
+        
+        // bind를 통해 this 값이 새로운 객체 값으로 결정되었지만 값을 실행하지 않고 내가 원하는 시기에 실행 할 수 있다.
+        // 반면 call, apply는 적용과 동시에 실행됩니다.
     </script>
 /*
 this.js 라면 console.log(this).하면 window도 아닌  {}이 뜬다

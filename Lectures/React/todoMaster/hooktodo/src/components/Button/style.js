@@ -63,8 +63,8 @@ export const Button = styled.button`
 	}
 	
 	:disabled{
-		background-color: '#d9d9d9';
-		color: '#333';
+		background-color: #d9d9d9;
+		color: #333;
 		opacity: 0.8;
 	}
 `;

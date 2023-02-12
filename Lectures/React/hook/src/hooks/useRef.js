@@ -30,3 +30,6 @@ function UseRef() {
 };
 
 export default UseRef;
+
+// useRef에 값을 전달하려면 태그에 ref={...} 넣으면된다
+// <input ref={password} />

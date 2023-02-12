@@ -5,12 +5,12 @@ function TimerModal({count, setCount}) {
 	const TimerRef = useRef();
 
 	useEffect(() => {
-		// 컴포넌트가 처음 보였을 때
+		// 컴포넌트가 처음 보였을 때(마운트)
 		TimerRef.current = setInterval(() => {
 			setCount((prev) => prev + 1);
 		}, 1000);
 
-		// 컴포넌트가 사라졌을 때
+		// 컴포넌트가 사라졌을 때(언마운트)
 		return () => {
 			clearInterval(TimerRef.current);
 			setCount(0);

@@ -22,6 +22,8 @@ function UseEffect() {
 		=> 특정state가 바뀔때마다 실행할 이벤트를 정의
 	*/
 
+	// async await을 사용하지 못한다
+
 	console.log(count);
 
 	return(
@@ -37,4 +39,4 @@ function UseEffect() {
 	);
 }
 
-export default UseEffect;
+export default UseEffect;	
