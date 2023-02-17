@@ -5,14 +5,33 @@ import TodoList from "./components/List/TodoList";
 import TodoFormModal from "./components/Modal/TodoForm";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify";
+import { useState } from "react";
 // toast가 보여주는 기능, ToastContainer는 UI
-
-export const print = () => {
-    console.log('반갑습니다.');
-};
 
 function TodoPage() {
 
+  const [todoList, setTodoList] = useState([
+      {
+        id: 1,
+        title: "example1",
+        content: "content1",
+        state: false,
+      },
+
+  ])
+
+  // 모달창 열고 닫고
+  const [ showModal, setShowModal ] = useState(false);
+  const onModalOpen = () => {
+    setShowModal(true)
+  }
+  const onModalClose = () => {
+    setShowModal(false)
+  }
+
+
+
+  // ToastMessage
   const onAddTodo = new Promise((resolve) => {
     setTimeout(() => resolve('todo'), 3000);
   });
@@ -33,17 +52,17 @@ function TodoPage() {
 
     return (
         <>
-        <TodoFormModal showToastMessage={showToastMessage}/>
+        { showModal && <TodoFormModal showToastMessage={showToastMessage} onModalClose={onModalClose}/>}
         <S.Wrapper>
             <S.Container>
             <S.Title>
                 List
             </S.Title>
             <S.Content>
-                <TodoList/>
+                <TodoList todoList={todoList}/>
             </S.Content>
             <S.ButtonBox>
-                <Button variant={'primary'} size={'full'}>
+                <Button variant={'primary'} size={'full'} onClick={onModalOpen}>
                     추가
                 </Button>
             </S.ButtonBox>

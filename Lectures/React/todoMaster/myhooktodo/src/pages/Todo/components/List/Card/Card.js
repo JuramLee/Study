@@ -4,13 +4,14 @@ import { faCheck, faBan, faPen } from "@fortawesome/free-solid-svg-icons";
 import { flexAlignCenter, flexCenter } from "styles/common";
 
 function TodoCard(props) {
-	// function TodoCard({example, todo}) {	
-	// props의 데이터가 적을 때는 매개변수에 구조분해할당
-	console.log('props', props);
-	console.log('example', props.example);
-	// 데이터가 많다면 컴포넌트 안에서 구조분해 할당으로 변수/상수 선언
+
 	const { todo } = props;
-	const { state, title, content } = todo; 	//위에 줄 없이 props.todo로 해도됨
+	const { state, title, content } = todo;
+
+  const [isOnEdit, setIsOnEdit] = useState(false);
+  const onEdit = () => {
+    
+  }
 
 	return(
 		<S.Wrapper state={state}>

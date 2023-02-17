@@ -33,7 +33,7 @@ function SignUpForm({setForm}) {
     //     if(!password || !passwordConfirm) return setIsPasswordConfirm(true);
     //     if(password !== passwordConfirm) {
     //         return setIsPasswordConfirm(false);
-    //     } return setIsPasswordConfirm(true)
+    //     } return setIsPasswordConfirm(true)0
     // }, [password, passwordConfirm])
 
     let emailRegex = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;

@@ -1,24 +1,36 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { flexAlignCenter, flexCenter, ModalBackground } from "styles/common";
 
-function TodoFormModal({showToastMessage}) {
+function TodoFormModal({showToastMessage, onModalClose}) {
   const onClickAddTodoBtn = (e) => {
     e.preventDefault();
+    console.log(e.target.title.value);
     showToastMessage();
   };
 
+  // const [title, setTitle] = useState('');
+  // const [content, setContent] = useState('');
+
+  // const onModalTitle = (e) => {
+  //   setTitle(e.target.value);
+  // }
+  // const onModalContent = (e) => {
+  //   setContent(e.target.value);
+  // }
+
   return (
-    <S.Wrapper>
+    <S.Wrapper onSubmit={onClickAddTodoBtn}>
       <S.Form>
         <S.Title>
           <span>ADD TODO LIST</span>
-          <button>X</button>
-        </S.Title>
+          <button onClick={onModalClose}>X</button>
+        </S.Title>  
         <S.Content>
-          <input placeholder="제목을 입력해주세요" />
-          <textarea placeholder="할 일 내용을 입력해주세요"></textarea>
+          <input placeholder="제목을 입력해주세요" name={'title'}/>
+          <textarea placeholder="할 일 내용을 입력해주세요" name={'content'}></textarea>
         </S.Content>
-        <S.Button onClick={onClickAddTodoBtn}>ADD</S.Button>
+        <S.Button>ADD</S.Button>
         {/* <S.Button onClick={() => showToastMessage()}>ADD</S.Button> */}
         {/* 화살표함수로 받을 때는 컴포넌트의 비즈니스로직을 두기 싫을 때 바로 전달해주려고! */}
       </S.Form>
