@@ -26,7 +26,7 @@ export const UserDispatchContext = createContext(); // dispatch
 export const useUserState = () => useContext(UserContext);
 // 이걸 안해주면 매번 저장소를 가져다 쓸 때마다 빈 값 만들어주고 값 저장시켜줘야함..
 // UserContext의 리턴값이 빈 저장소가 아니라 값이 채워진 저장소이다
-export const useUserDispatch = () => useContext(UserDisPatchContext);
+export const useUserDispatch = () => useContext(UserDispatchContext);
 
 // export const ADD_STATE = "ADD_STATE";
 // export const REMOVE_STATE = "REMOVE_STATE";
@@ -57,7 +57,7 @@ const ContextProvider = ({ children }) => {
     /* UsetContext라는 저장소에서 {children}에게 권한을 주고 저장소에 initialValue를 채운다 */
     <UserContext.Provider value={state}>
     {/*vale={[state, dispatch || setState ]}로도 전달 가능, 주석아닌 형태는 redux형태*/}
-    <UserDisPatchContext.Provider value={dispatch}>{children}</UserDisPatchContext.Provider>
+    <UserDispatchContext.Provider value={dispatch}>{children}</UserDispatchContext.Provider>
   </UserContext.Provider>
   );
 };
