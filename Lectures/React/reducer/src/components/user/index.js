@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { UserContext, useUserState } from "../../context/User";
+import { REMOVE_STATE, UserContext, useUserState } from "../../context/User";
 import AddUser from "./AddUser";
 import UserList from "./UserList";
 
@@ -7,8 +7,12 @@ import UserList from "./UserList";
 function User() {
 
 	const [userList, setUserList] = useUserState();
+	// const userList = useContext(UserContext);를 구조분해할당해준것
+    // const [userList, setUserList] = useContext(UserContext);
 	// 내가 만든 context 사용하겠다
-	// 그 context의 value는 state, setState
+	// 그 context의 value는 [state, setState](useContext(UserContext)의 리턴값)
+
+
 	// const [userList, setUserList] = useState([
 	// 	{
 	// 		id: 1,
@@ -42,16 +46,25 @@ function User() {
 	// }
 
 	const onDeleteUser = (id) => {
-		const deleteUserList = userList.filter((user) => user.id !== id);
-		setUserList(deleteUserList);
+		// const deleteUserList = userList.filter((user) => user.id !== id);
+		// setUserList(deleteUserList);
+		// dispatch({
+		// 	type: REMOVE_STATE,		// util로 만든거 활용
+		// 	payload: {				// User.js에서 만든 변수가 리턴값이 함수이고 그 함수 매개변수로 값 전달하면 payload로 저장됨
+		// 		id,
+		// 	}
+		// })
+		dispatch(REMOVE_STATE({ id }));
 	}
 
 	const onAddUser = (name) => {
-		const newUser = {
-			id: userList[userList.length -1].id + 1,
-			name,
-		};
-		setUserList([...userList, newUser])
+		// const newUser = {
+		// 	id: userList[userList.length -1].id + 1,
+		// 	name,
+		// };
+		// setUserList([...userList, newUser])
+		const id = userList[userList.length - 1].id + 1;
+		dispatch(ADD_STATE({ id, name }));
 	}
 
 	return (

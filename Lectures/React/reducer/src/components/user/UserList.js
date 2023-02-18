@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { UserContext, useUserState } from "../../context/User";
 
 function UserList({ onDeleteUser}) {
+//뿌려주는 역할
 
 	// const onDelete = (e) => {
 	// 	console.log(e.target.parentNode)
