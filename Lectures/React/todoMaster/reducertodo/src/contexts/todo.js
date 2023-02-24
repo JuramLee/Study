@@ -1,9 +1,19 @@
-const { createContext, useReducer } = require("react");
+const { createContext, useReducer, useContext } = require("react");
 
-const initialState = [];
+const initialState = [
+      {
+      id: 1,
+      title: 'title1',
+      content: 'content1',
+      state: false,
+    }
+];
 
-const TodoListContext = createContext();
-const TodoDispatchContext = createContext();
+export const TodoListContext = createContext();
+export const TodoDispatchContext = createContext();
+
+export const useTodoList = () => useContext(TodoListContext);
+export const useTodoDispatch = () => useContext(TodoDispatchContext);
 
 const todoReducer = (state, action) => {
   switch (action.type) {
@@ -15,6 +25,7 @@ const todoReducer = (state, action) => {
 		{id}
 		{res?}
 		*/
+
       return [action.payload, ...state];
     case "DELETE_TODO":
       //   return state.filter((todo) => todo.id !== action.payload);

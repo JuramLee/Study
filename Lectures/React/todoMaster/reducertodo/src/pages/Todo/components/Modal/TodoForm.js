@@ -1,7 +1,8 @@
+import { useTodoList } from "contexts/todo";
 import styled from "styled-components";
 import { flexAlignCenter, flexCenter, ModalBackground } from "styles/common";
 
-function TodoFormModal({showAddTodoToastMessage, onClose}) {
+function TodoFormModal({showAddTodoToastMessage, onClose}) {  
   const onClickAddTodoBtn = (e) => {
     e.preventDefault();
     console.log(e.target.title.value);

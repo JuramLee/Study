@@ -6,6 +6,7 @@ import TodoFormModal from "./components/Modal/TodoForm";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify";
 import { useState } from "react";
+import { useTodoDispatch, useTodoList } from "contexts/todo";
 // toast가 보여주는 기능, ToastContainer는 UI
 
 export const print = () => {
@@ -16,14 +17,14 @@ function TodoPage() {
 
   // state
   const [isOpenAddTodoModal, setIsOpenAddTodoModal] = useState(false);
-  const [todoList, setTodoList] = useState([
-    {
-      id: 1,
-      title: 'title1',
-      content: 'content1',
-      state: false,
-    }
-  ])
+  // const [todoList, setTodoList] = useState([
+  //   {
+  //     id: 1,
+  //     title: 'title1',
+  //     content: 'content1',
+  //     state: false,
+  //   }
+  // ])
 
     
     // toast
@@ -47,6 +48,11 @@ function TodoPage() {
     // const onAddTodo = new Promise((resolve) => {
     //   setTimeout(() => resolve('todo'), 3000);
     // });
+
+    const [todoList] = useTodoList();
+    const [dispatch] = useTodoDispatch();
+
+
   const handleAddTodo = (title, content) => {
     return new Promise((resolve, reject) => {
       if(!title || !content) {
@@ -64,7 +70,16 @@ function TodoPage() {
       }, 1000)
     }).then((res) => {
       // const newTodoList = [...todoList].push(res)
-      setTodoList([...todoList, res])
+      dispatch({
+        type: "ADD_TODO",
+        payload: {
+          id: res.id,
+          state: res.state,
+          title: res.title,
+          content: res.content,
+        }
+      })
+      // setTodoList([...todoList, res])
       setIsOpenAddTodoModal(false)
     })
   }
@@ -79,7 +94,7 @@ function TodoPage() {
                 List
             </S.Title>
             <S.Content>
-                <TodoList todoList={todoList} setTodoList={setTodoList}/>
+                <TodoList/>
             </S.Content>
             <S.ButtonBox>
                 <Button variant={'primary'} size={'full'} onClick={handleOpenTodoAddModal}>

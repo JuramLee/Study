@@ -1,21 +1,43 @@
+import { useTodoDispatch, useTodoList } from "contexts/todo";
 import TodoCard from "./Card/Card";
 
-function TodoList({ todoList, setTodoList }) {
+function TodoList({}) {
+
+  const [todoList] = useTodoList();
+  const [dispatch] = useTodoDispatch();
+
+
   const onUpdateTodo = (id, content, state) => {
-    const newTodoList = [...todoList];
-    const todo = newTodoList.find((todo) => todo.id === id);
-    todo.content = content;
-    todo.state = state;
-    setTodoList(newTodoList);
+    dispatch({
+      type: "UPDATE_TODO",
+      payload: {
+        id,
+        content,
+        state,
+      }
+    })
+    // const newTodoList = [...todoList];
+    // const todo = newTodoList.find((todo) => todo.id === id);
+    // todo.content = content;
+    // todo.state = state;
+    // setTodoList(newTodoList);
   };
 
   const onDeleteTodo = (id) => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      const deleteTodoList = todoList.filter((todo) => todo.id !== id);
-      // filter와 같이 새로운 배열을 반환하는 메서드는 이미 불변성을 지키고 있기 때문에 따로 불변성을 지킬 필요가 없다
-      setTodoList(deleteTodoList);
-    }
+    dispatch({
+      type: "DELETE_TODO",
+      payload: {
+        id,
+      }
+    })
+    // if (window.confirm("정말 삭제하시겠습니까?")) {
+    //   const deleteTodoList = todoList.filter((todo) => todo.id !== id);
+    //   // filter와 같이 새로운 배열을 반환하는 메서드는 이미 불변성을 지키고 있기 때문에 따로 불변성을 지킬 필요가 없다
+    //   setTodoList(deleteTodoList);
+    // }
   };
+
+
 
   return (
     <div>
@@ -26,7 +48,6 @@ function TodoList({ todoList, setTodoList }) {
         return (
           <TodoCard
             todo={todo}
-            example={"test"}
             onEdit={onUpdateTodo}
             onDelete={onDeleteTodo}
           />
