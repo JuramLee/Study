@@ -4,7 +4,6 @@ import { FailureData, SuccessData } from '../util/resultData.js';
 
 export class TodoService {
   static async create(req, res, next) {
-    console.log(req.body);
 
     try {
       const todo = await Todo.create({

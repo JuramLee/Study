@@ -1,76 +1,113 @@
-import Button from 'components/Button/Button';
-import styled from 'styled-components';
-import { flexAlignCenter, flexCenter } from 'styles/common';
-import TodoList from './components/List/TodoList';
-import TodoFormModal from './components/Modal/TodoForm';
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from 'react-toastify';
-import { useState } from 'react';
+import Button from "components/Button/Button";
+import styled from "styled-components";
+import { flexAlignCenter, flexCenter } from "styles/common";
+import TodoList from "./components/List/TodoList";
+import TodoFormModal from "./components/Modal/TodoForm";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+import { useEffect, useState } from "react";
+import AuthApi from "apis/authApi";
+import TodoApi from "apis/todoApi";
 
 export const print = () => {
-  console.log('반갑습니다');
+  console.log("반갑습니다");
 };
 
 function TodoPage() {
   // state
   const [isOpenAddTodoModal, setIsOpenAddTodoModal] = useState(false);
-  const todoList = [];
+  const [todoList, setTodoList] = useState("");
+
+  useEffect(() => {
+    const getTodoList = async () => {
+      const res = await TodoApi.getPost();
+      console.log(res);
+      setTodoList(res.data.data);
+    };
+    getTodoList();
+  }, []);
 
   // toast
-  const handleAddTodo = (title, content) => 
-  new Promise((resolve, reject) => {
-      if(!title || !content){
-        return reject("need fullfilled");
-      }
+  const handleAddTodo = async (title, content) => {
+    if(!title || !content) {
+      return alert('빈칸을 채워주세요');
+    }
 
-      setTimeout(()=>{
-          const newTodo = {
-            id: Math.floor(Math.random() * 100000),
-            state: false,
-            title,
-            content
-          };
-          resolve(newTodo)
-      }, 1000)
-
-    }).then((res)=>{
-
-      setIsOpenAddTodoModal(false)
-    })
-  
+    return TodoApi.addPost({title, content}).then((res) => {
+    if(res.status === 200) {
+      setTodoList([res.data.data, ...todoList]);
+    }
+    setIsOpenAddTodoModal(false); 
+  }).catch((err) => {
+        throw new Error(err);
+    });
+  };
+  // try {
+  //   const res = await TodoApi.addPost(title, content);
+  //   console.log(res);
+  //   const newTodo = {
+  //     id: Math.floor(Math.random() * 100000),
+  //     state: false, //     title: res.data.data,
+  //     title,
+  //     content: res.data.data.content,
+  //   };
+  //   setIsOpenAddTodoModal(false);
+  // } catch (err) {
+  //   console.error(err);
+  // }
+  // new Promise( async (resolve, reject) => {
+  //     if(!title || !content){
+  //       return reject("need fulfilled");
+  //     }
+  //         const newTodo = {
+  //           id: Math.floor(Math.random() * 100000),
+  //           state: false,
+  //           title,
+  //           content
+  // };
+  // const res = await TodoApi.addPost({title, content})
+  //         resolve(res)
+  //   }).then((res)=>{
+  //     setIsOpenAddTodoModal(false)
+  //   })
 
   const showAddTodoToastMessage = (title, content) => {
     toast.promise(handleAddTodo(title, content), {
-      pending: 'TODO LOADING',
-      success: 'TODO SUCCESS',
-      error: 'TODO ERROR',
+      pending: "TODO LOADING",
+      success: "TODO SUCCESS",
+      error: "TODO ERROR",
     });
   };
 
   // handle
   const handleOpenTodoAddModal = () => {
-    setIsOpenAddTodoModal(true)
-  }
+    setIsOpenAddTodoModal(true);
+  };
 
   const handleCloseTodoAddModal = () => {
-    setIsOpenAddTodoModal(false)
-  }
+    setIsOpenAddTodoModal(false);
+  };
 
   return (
     <>
-      {isOpenAddTodoModal && 
-      <TodoFormModal 
-        showAddTodoToastMessage={showAddTodoToastMessage} 
-        onClose={handleCloseTodoAddModal}
-      />}
+      {isOpenAddTodoModal && (
+        <TodoFormModal
+          showAddTodoToastMessage={showAddTodoToastMessage}
+          onClose={handleCloseTodoAddModal}
+        />
+      )}
       <S.Wrapper>
         <S.Container>
           <S.Title>List</S.Title>
           <S.Content>
-            <TodoList todoList={todoList}/>
+            <TodoList todoList={todoList} setTodoList={setTodoList} />
           </S.Content>
           <S.ButtonBox>
-            <Button variant={'primary'} size={'full'} onClick={handleOpenTodoAddModal}>
+            <Button
+              variant={"primary"}
+              size={"full"}
+              onClick={handleOpenTodoAddModal}
+            >
               추가
             </Button>
           </S.ButtonBox>

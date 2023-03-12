@@ -1,0 +1,45 @@
+
+1. 토큰의 종류에는 access_token과 refresh_token이 있다.
+	- refresh_token은 있을 수도 없을 수도 있다. 
+	  단, 없으면 access_token의 만료기간이 끝나면 로그아웃 시켜줘야함
+		  있으면 알아서 access_token을 재발급 받는 로직 작성
+
+		  즉 둘다 만료되면 로그아웃시켜줘야함
+
+2. token을 관리하는 방법
+	- Web Storage
+	- Cookies
+		만약 쿠크로 토큰을 관리하는 경우에는 백엔드 개발자와 이야기 후 진행해야함
+	- State
+
+3. 토큰을 백엔드가 프론트에게 전달하는 방법 (Back -> Front)
+	1. res.body
+		ex) const res = await ...
+			res.data
+
+			---> 웹스토리지, 쿠키 state중 아무데나 저장
+
+	2. res.header
+		ex) const res = await ...
+			res.config.header
+
+			---> 웹스토리지, 쿠키 state중 아무데나 저장
+
+	3. cookies
+		axios의 인스턴스 옵션에서 withCredentials: true 해야만 프론트엔드가 토큰을 전달 받을 수 있음
+
+		ㄴ 이 경우 만약 쿠키를 사용해야한다면 react-cookie라는 라이브러리를 설치하여
+			const [cookies, setCookies] = useCookies(['access_token'])로 접근해야함
+		ㄴ 단, refresh의 경우는 httpOnly라는 보안 설정 때문에 js로 접근이 불가능하게 만들어뒀을 가능성이 큼
+
+	=> 위 세가지 방법 중 완벽하게 안전한 방법은 없다.
+
+4. 토큰을 프론트엔드가 백엔드 서버에 전달하는 방법 (Front -> Back)
+	1. req.body
+		- axios.post에 데이터 보내면 됨
+
+	2. req.header
+		- axios의 interceptor
+
+	3. cookies
+		- withCredentials: true

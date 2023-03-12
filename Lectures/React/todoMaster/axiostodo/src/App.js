@@ -7,14 +7,17 @@ import HomePage from "./pages/Home";
 import { TodoPage } from "./pages/Todo";
 import theme from "./styles/theme";
 import router from "./routes/routing";
+import AuthProvider from "contexts/auth";
 
 
 function App() {
 
   return (
       <ThemeProvider theme={theme}>
+        <AuthProvider>
         <GlobalStyles />
         <RouterProvider router={router} />
+        </AuthProvider>
       </ThemeProvider>
   );
 }
