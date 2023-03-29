@@ -1,20 +1,19 @@
-import Button from "components/Button/Button";
-import styled from "styled-components";
-import { flexAlignCenter, flexCenter } from "styles/common";
-import TodoList from "./components/List/TodoList";
-import TodoFormModal from "./components/Modal/TodoForm";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
-import { useEffect, useState } from "react";
-import AuthApi from "apis/authApi";
-import TodoApi from "apis/todoApi";
-import { useRecoilState } from "recoil";
-import { addModalAtom } from "atoms/ui.atom";
-import useGetTodo from "hooks/queries/todo/getTodo";
-import useAddTodo from "hooks/queries/todo/add_todo";
+import Button from 'components/Button/Button';
+import styled from 'styled-components';
+import { flexAlignCenter, flexCenter } from 'styles/common';
+import TodoList from './components/List/TodoList';
+import TodoFormModal from './components/Modal/TodoForm';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+
+import { useRecoilState } from 'recoil';
+import { addModalAtom } from 'atoms/ui.atom';
+import useGetTodo from 'hooks/queries/todo/getTodo';
+import useAddTodo from 'hooks/queries/todo/add_todo';
+import { Suspense } from 'react';
 
 export const print = () => {
-  console.log("반갑습니다");
+  console.log('반갑습니다');
 };
 
 function TodoPage() {
@@ -23,19 +22,17 @@ function TodoPage() {
     useRecoilState(addModalAtom); // 전역상태 관리 완료
   // const [isOpenAddTodoModal, setIsOpenAddTodoModal] = useState(false);
 
-  const { data: todoList, status, isLoading } = useGetTodo();
   const { mutate } = useAddTodo();
-  console.log(status, isLoading);
+  // console.log(status, isLoading);
 
   // toast
   const handleAddTodo = async (title, content) => {
     if (!title || !content) {
-      return alert("빈칸을 채워주세요");
+      return alert('빈칸을 채워주세요');
     }
-
     const data = await new Promise((resolve, reject) => {
       if (!title || !content) {
-        alert("빈칸을 채워주세요");
+        alert('빈칸을 채워주세요');
         return reject();
       }
       const newTodo = {
@@ -50,9 +47,9 @@ function TodoPage() {
 
   const showAddTodoToastMessage = (title, content) => {
     toast.promise(handleAddTodo(title, content), {
-      pending: "TODO LOADING",
-      success: "TODO SUCCESS",
-      error: "TODO ERROR",
+      pending: 'TODO LOADING',
+      success: 'TODO SUCCESS',
+      error: 'TODO ERROR',
     });
   };
 
@@ -64,8 +61,6 @@ function TodoPage() {
   const handleCloseTodoAddModal = () => {
     setIsOpenAddTodoModal(false);
   };
-
-  if (isLoading) return <div>...LOADING...</div>;
 
   return (
     <>
@@ -79,19 +74,20 @@ function TodoPage() {
         <S.Container>
           <S.Title>List</S.Title>
           <S.Content>
-            <TodoList todoList={todoList?.data.data} />
+            <Suspense fallback={<div>로딩중...</div>}>
+              <TodoList />
+            </Suspense>
           </S.Content>
           <S.ButtonBox>
             <Button
-              variant={"primary"}
-              size={"full"}
-              onClick={handleOpenTodoAddModal}
-            >
+              variant={'primary'}
+              size={'full'}
+              onClick={handleOpenTodoAddModal}>
               추가
             </Button>
           </S.ButtonBox>
         </S.Container>
-        <ToastContainer autoClose={2000} theme="colored" />
+        <ToastContainer autoClose={2000} theme='colored' />
       </S.Wrapper>
     </>
   );

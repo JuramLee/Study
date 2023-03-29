@@ -1,7 +1,9 @@
-import axios from "axios";
-import { useAuth } from "contexts/auth";
-import TokenService from "repository/TokenService";
-import AuthApi from "./authApi";
+import axios from 'axios';
+import { useAuth } from 'contexts/auth';
+import TokenService from 'repository/TokenService';
+import AuthApi from './authApi';
+
+console.log(process.env.REACT_APP_BACKEND_URL);
 
 export const Axios = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL,
@@ -46,7 +48,7 @@ Axios.interceptors.response.use(
       if (res.status === 200) {
         const token = res.data.data;
         TokenService.setToken(token);
-        Axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         return Axios(originalRequest);
       }
 

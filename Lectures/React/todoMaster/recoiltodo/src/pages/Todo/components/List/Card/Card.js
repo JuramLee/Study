@@ -6,29 +6,28 @@ import { useState } from 'react';
 import useInput from 'hooks/useInput';
 
 function TodoCard(props) {
-    // const { todo } = props;
+  // const { todo } = props;
   // const { state, title, content} = todo;
   const { handleEdit, onDelete } = props;
-  const { id, state, title, content} = props.todo;
+  const { id, state, title, content } = props.todo;
 
   const [isTodoEdit, setIsTodoEdit] = useState(false);
   const [editContent, onChangeEidtContent] = useInput(content);
 
   const onSetIsTodoEditTrue = () => {
-    setIsTodoEdit(true)
-  }
+    setIsTodoEdit(true);
+  };
 
   const onClickTodoEditBtn = () => {
-    if(editContent === content) return setIsTodoEdit(false);
+    if (editContent === content) return setIsTodoEdit(false);
     handleEdit(id, editContent, state);
-    setIsTodoEdit(false)
-  }
+    setIsTodoEdit(false);
+  };
 
   const onClickTodoSatetEditbtn = () => {
-    console.log(state, !state)
+    console.log(state, !state);
     handleEdit(id, content, !state);
-  }
-
+  };
 
   return (
     <S.Wrapper state={state}>
@@ -39,13 +38,23 @@ function TodoCard(props) {
         <S.Title state={state}>
           {title}
           <div>
-            <FontAwesomeIcon icon={faPen} onClick={isTodoEdit ? onClickTodoEditBtn :  onSetIsTodoEditTrue} />
-            <FontAwesomeIcon icon={faBan} onClick={()=>onDelete(id)}/>
+            <FontAwesomeIcon
+              icon={faPen}
+              onClick={isTodoEdit ? onClickTodoEditBtn : onSetIsTodoEditTrue}
+            />
+            <FontAwesomeIcon icon={faBan} onClick={() => onDelete(id)} />
           </div>
         </S.Title>
       </S.Header>
       <S.Content state={state}>
-        {isTodoEdit ? <textarea value={editContent} onChange={onChangeEidtContent}></textarea> : content}</S.Content>
+        {isTodoEdit ? (
+          <textarea
+            value={editContent}
+            onChange={onChangeEidtContent}></textarea>
+        ) : (
+          content
+        )}
+      </S.Content>
     </S.Wrapper>
   );
 }

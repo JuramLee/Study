@@ -1,9 +1,9 @@
-const { Axios } = require("./core");
+const { Axios } = require('./core');
 
-const TODO = "/todo";
+const TODO = '/todo';
 
 const TodoApi = {
-  addPost({ content, title }) {
+  addTodo({ content, title }) {
     return Axios.post(TODO, { content, title });
   },
   getPost() {
