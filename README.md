@@ -2,10 +2,9 @@
 
 #### 👉 구현 예정 기능 (stack, library ...)
 
-TailwindCSS, react-hook-form, pagination(정석 / react-js-pagination), 검색엔진, 로그인로직,  
-recoil, redux, reducer, react-query, serverless배포, suspense, redux-tool-kit, InfiniteScroll(정석),  
-마크다운 언어 변환, CSS 테이블/그리드, Storybook, bootstrap,  
-mediaQuery(react-device-detect(반응형 라이브러리), react-responsive(반응형 라이브러리 / 성능이 더 좋지만 IE11 이하 버전 지원 X)),  
+TailwindCSS, react-hook-form, pagination(정석 / react-js-pagination), 검색엔진, 로그인로직, recoil,  
+redux, reducer, react-query, serverless배포, suspense, redux-tool-kit, InfiniteScroll(정석), 마크다운 언어 변환,  
+CSS 테이블/그리드, Storybook, bootstrap, mediaQuery(react-device-detect(라이브러리), react-responsive(라이브러리),  
 <br></br>
 
 #### 👉 토이 프로젝트로 사용해본 기능
