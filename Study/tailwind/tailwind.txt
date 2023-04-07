@@ -1,0 +1,79 @@
+npx CRA로 리액트 앱을 만든 후
+    1. npm i -D tailwindcss postcss autoprefix
+        tailwindcss: Tailwind CSS 프레임워크
+        postcss: tailwind css를 해석해주는 역할
+        autoprefixer: 브라우저 호환 설정
+
+    2. npx tailwindcss init -p
+        ㄴ tailwind.config.js랑 postcss.config.js 파일이 만들어지고 해당 파일 안에 가서 설정해줘야함.
+        ㄴ tailwind.config.js -> content: ['./src/**/*.{js,jsx,ts,tsx}']
+        ㄴ postcss.config.js ->  // postcss.config.js
+                                module.exports = {
+                                    plugins: [require('tailwindcss'), require('autoprefixer')],
+                                };
+
+    3. npm install @craco/craco
+        ㄴ CRA는 postcss configuration을 기본적으로 오버라이드 할 수 없으므로 craco를 설치해야함
+        ㄴ CRACO란 Create React App Configuration Override의 약자로 create-react-app을 위한 configuration layer
+        ㄴ Craco를 설치한 후 package.json에서 scripts 부분에서 react-scripts 대신 craco를 사용하여 아래와 같이 변경해준다.
+            {
+                "scripts": {
+                    "start": "craco start",
+                    "build": "craco build",
+                    "test": "craco test",
+                    "eject": "react-scripts eject"
+                },
+            }
+
+    4. 프로젝트 루트에 craco.config.js 생성 후 작성
+        // craco.config.js
+        module.exports = {
+            style: {
+                postcss: {
+                    plugins: [
+                        require('tailwindcss'),
+                        require('autoprefixer'),
+                    ],
+                },
+            },
+        }
+    
+    5. Tailwindcss는 동적으로 생성된 클래스는 인식하지 않는다(tailwind.config.js안에 purge 내용)
+
+    6. 클래스 커스터 마이징 가능.
+        h1 { 
+            @apply 어쩌구 저쩌구
+        }
+        .클래스명 태그 {
+            @apply 어쩌구 저쩌구
+        }
+    7. 커스텀한 클래스는 (@apply) import로 파일 연결시켜줘야 사용가능
+
+
+
+리액트 CRA로 만든 파일의 경우 웹팩 설정이 되어있기 때문에 실제 css가 필요한 파일에 가서
+    * import "tailwindcss/tailwind.css"; 해주면 됨
+
+VScode에서는 자동완성을 도와주기 위한 Tailwind CSS IntelliSense 플러그인이 있다.
+
+Tailwind 공식 사이트 : https://tailwindcss.com/
+Tailwind 사용법은 공식 사이트에서 : https://tailwindcss.com/docs/aspect-ratio
+
+
+장점)
+    html에서 css 파일로의 이동 없이 css효과를 줄 수 있다.
+    클래스명을 크게 고민할 필요가 없다(지정된 클래스명으로 조정하기 때문)
+    반응형 환경을 좀 더 쉽게 조작할 수 있다
+    다크모드를 자동으로 변환해 줄 수 있다
+    UI component 제공 -> https://tailwindui.com/   https://tailwindcomponents.com/
+    자바스크립트와 완전한 분리. CSS만으로 변경됨
+
+단점)
+    러닝커브
+    html 코드가 지저분해진다(클래스명이 덕지덕지) -> @apply로 일부 해소 가능
+
+
+
+기타 참고
+https://blog.rhostem.com/posts/2021-06-05-tailwind-css
+https://fe-developers.kakaoent.com/2022/221013-tailwind-and-design-system/

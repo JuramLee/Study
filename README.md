@@ -4,7 +4,7 @@
 
 TailwindCSS, mediaQuery(library), react-hook-form, pagination, 검색엔진, 로그인로직,  
 recoil, redux, reducer, react-query, serverless배포, suspense, redux-tool-kit, InfiniteScroll(정석),  
-마크다운 언어 변환, CSS 테이블
+마크다운 언어 변환, CSS 테이블, Storybook, bootstrap
 <br></br>
 
 #### 👉 토이 프로젝트로 사용해본 기능
