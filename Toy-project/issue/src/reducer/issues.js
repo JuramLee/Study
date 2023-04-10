@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import IssueApi from 'apis/issueApi';
+import IssueApi from '../Apis/issueApi';
 
 // value
 const initialState = {
@@ -8,7 +8,7 @@ const initialState = {
   getTodoState: {
     loading: false,
     done: false,
-    err: null,
+    error: null,
   },
 };
 
@@ -25,13 +25,13 @@ export const issueSlice = createSlice({
       state.issues = action.payload;
       state.getTodoState.loading = false;
       state.getTodoState.done = true;
-      state.getTodoState.err = null;
+      state.getTodoState.error = null;
     });
 
     builder.addCase(getIssues.rejected, (state, action) => {
       state.getTodoState.loading = false;
       state.getTodoState.done = true;
-      state.getTodoState.err = action.payload;
+      state.getTodoState.error = action.payload;
     });
 
     builder.addCase(getTargetIssue.pending, (state) => {
@@ -42,13 +42,13 @@ export const issueSlice = createSlice({
       state.targetIssue = action.payload;
       state.getTodoState.loading = false;
       state.getTodoState.done = true;
-      state.getTodoState.err = null;
+      state.getTodoState.error = null;
     });
 
     builder.addCase(getTargetIssue.rejected, (state, action) => {
       state.getTodoState.loading = false;
       state.getTodoState.done = true;
-      state.getTodoState.err = action.payload;
+      state.getTodoState.error = action.payload;
     });
   },
 });
