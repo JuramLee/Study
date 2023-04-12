@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.test {
+  @apply text-slate-300 py-2 px-4 bg-gray-200 rounded-full;
+}
