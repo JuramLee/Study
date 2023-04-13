@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIssues, getTargetIssue } from '../Reducer/issues';
-import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
-import remarkGfm from 'remark-gfm';
+import { getIssues, getTargetIssue } from '../../Reducer/issues';
+
+import Post from './Components/post';
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -25,10 +25,11 @@ const Main = () => {
   return (
     <div>
       {issues &&
-        issues.map((issue) => (
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {issue.body}
-          </ReactMarkdown>
+        issues.map((issue, idx) => (
+          <Post issue={issue} key={idx} />
+          // <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          //   {issue.body}
+          // </ReactMarkdown>
         ))}
     </div>
   );
