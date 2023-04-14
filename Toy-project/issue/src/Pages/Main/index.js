@@ -24,8 +24,8 @@ const Main = () => {
     );
   }, []);
 
-  const onClickPost = (e, id) => {
-    e.stopPropagation();
+  const onClickPost = (id) => {
+    // e.stopPropagation();
     navigate(`/detail/${id}`);
   };
 
@@ -33,10 +33,8 @@ const Main = () => {
     <div className='py-8'>
       {issues &&
         issues.map((issue, idx) => (
-          <Post issue={issue} key={idx} onClick={(e) => console.log(e)} />
-          // <ReactMarkdown remarkPlugins={[remarkGfm]}>
-          //   {issue.body}
-          // </ReactMarkdown>
+          <Post issue={issue} key={idx} onClickPost={onClickPost} />
+          // <></>
         ))}
     </div>
   );
