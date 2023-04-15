@@ -25,7 +25,6 @@ const Main = () => {
   }, []);
 
   const onClickPost = (id) => {
-    // e.stopPropagation();
     navigate(`/detail/${id}`);
   };
 
