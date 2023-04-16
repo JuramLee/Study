@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getIssues, getTargetIssue } from '../../Reducer/issues';
 
 import Post from './Components/post';
+import FilterOption from './Components/filter';
 
 const Main = () => {
   const { issues } = useSelector((state) => state.issue);
@@ -30,10 +31,10 @@ const Main = () => {
 
   return (
     <div className='py-8'>
+      <FilterOption />
       {issues &&
         issues.map((issue, idx) => (
           <Post issue={issue} key={idx} onClickPost={onClickPost} />
-          // <></>
         ))}
     </div>
   );
