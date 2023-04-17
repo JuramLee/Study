@@ -21,6 +21,7 @@ const Post = ({ issue, onClickPost }) => {
             {issue.body}
           </ReactMarkdown>
         </div>
+        <div className='flex flex-row-reverse'>Comments : {issue.comments}</div>
       </div>
     </div>
   );

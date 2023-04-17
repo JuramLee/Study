@@ -10,9 +10,9 @@ const IssueApi = {
   getIssueList(issue) {
     return Axios.get(PATH, {
       params: {
-        per_page: issue.perPage,
-        page: issue.offset,
-        sort: issue.sortState,
+        per_page: issue.per_page,
+        page: issue.page,
+        sort: issue.sort,
       },
     });
   },
