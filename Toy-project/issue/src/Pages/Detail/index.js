@@ -8,7 +8,6 @@ const Detail = () => {
   const { id } = useParams();
   const idx = issues.findIndex((item) => item.id == id);
   const post = issues[idx];
-  console.log('포스트', post);
 
   return (
     <div className='w-full p-24 font-mono'>

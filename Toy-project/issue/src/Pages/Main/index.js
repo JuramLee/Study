@@ -5,10 +5,10 @@ import { getIssues, getTargetIssue } from '../../Reducer/issues';
 
 import Post from './Components/post';
 import FilterOption from './Components/filter';
+import Pagination from './Components/pagination';
 
 const Main = () => {
   const { issues } = useSelector((state) => state.issue);
-  console.log(issues);
   const [per_page, setPer_page] = useState(10);
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState('created');
@@ -59,6 +59,51 @@ const Main = () => {
     });
   };
 
+  const onClickPage = (pageNum) => {
+    setPage(pageNum);
+    setSearchParams({
+      per_page,
+      page: pageNum,
+      sort,
+    });
+  };
+
+  const onClickPrevious = (pageNum) => {
+    setPage(pageNum);
+    setSearchParams({
+      per_page,
+      page: pageNum,
+      sort,
+    });
+  };
+
+  const onClickNext = (pageNum) => {
+    setPage(pageNum);
+    setSearchParams({
+      per_page,
+      page: pageNum,
+      sort,
+    });
+  };
+
+  const onClickLast = (last) => {
+    setPage(last);
+    setSearchParams({
+      per_page,
+      page: last,
+      sort,
+    });
+  };
+
+  const onClickFirst = (first) => {
+    setPage(first);
+    setSearchParams({
+      per_page,
+      page: first,
+      sort,
+    });
+  };
+
   return (
     <div className='py-8'>
       <FilterOption onClickOption={onClickOption} onClickCount={onClickCount} />
@@ -66,6 +111,15 @@ const Main = () => {
         issues.map((issue, idx) => (
           <Post issue={issue} key={idx} onClickPost={onClickPost} />
         ))}
+      <Pagination
+        page={page}
+        per_page={per_page}
+        onClickPage={onClickPage}
+        onClickPrevious={onClickPrevious}
+        onClickNext={onClickNext}
+        onClickLast={onClickLast}
+        onClickFirst={onClickFirst}
+      />
     </div>
   );
 };
