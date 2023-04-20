@@ -28,6 +28,9 @@ const Main = () => {
 
   useEffect(() => {
     if (!searchParams.get('per_page')) return;
+    // setPer_page(searchParams.get('per_page'));
+    // setSort(searchParams.get('sort'));
+    // setPage(searchParams.get('page'));
     dispatch(
       getIssues({
         per_page: searchParams.get('per_page'),
@@ -69,7 +72,8 @@ const Main = () => {
   };
 
   const onClickPrevious = (pageNum) => {
-    setPage(pageNum);
+    const paramOffset = parseInt(searchParams.get('page'));
+    setPage(paramOffset);
     setSearchParams({
       per_page,
       page: pageNum,
@@ -113,12 +117,16 @@ const Main = () => {
         ))}
       <Pagination
         page={page}
+        setPage={setPage}
         per_page={per_page}
+        sort={sort}
         onClickPage={onClickPage}
         onClickPrevious={onClickPrevious}
         onClickNext={onClickNext}
         onClickLast={onClickLast}
         onClickFirst={onClickFirst}
+        searchParams={searchParams}
+        setSearchParams={setSearchParams}
       />
     </div>
   );
