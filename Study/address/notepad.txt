@@ -1,0 +1,38 @@
+주소 찾기 API
+    주소 찾기 api는 다음에서 무상으로 제공중.
+    하지만 허용하는 파라미터(autoload=false) 외엔 사용 불허.
+
+    다른 파라미터 붙인채로 요청할 경우 요청이 제한될 수 있음.
+
+
+    설치 npm i react-daum-postcode
+
+======================================================================================================
+
+portal
+    ReactDom의 Portals (v16부터 도입됨)
+    리액트 프로젝트에서 컴포넌트를 랜더링할 때 UI를 어디에 랜더링 시킬지 
+    DOM을 사전에 선택하여 부모 컴포넌트 바깥에서 랜더링 할 수 있게 해주는 기능
+
+    const MyPortal = ({ children }) => {
+        const el = document.getElementById('my-portal');   // useRef()로 대체 가능
+        return ReactDOM.createPortal(children, el);        // useRef()로 사용했을 경우 el.current로 접근
+    } // 가져온 id값을 가진 태그를 children으로 넣어주는 portal역할을 할 파일
+
+     => #14번째 코드를 보면 my-portal이라는 id 값의 DOM을 찾고, 원하는 jsx를 해당 DOM 앨리먼트에 랜더링 할 수 있다.
+    
+    실제 사용할 곳 가서 portal 역할을 하는 컴포넌트 삽입하고 그 안에 실제 띄울 컴포넌트 추가
+        <portal 역할을 하는 컴포넌트>
+          {modalOn && <Modal onClose={handleModal} />}  // 살제 띄울 컴포넌트
+        </portal 역할을 하는 컴포넌트>
+
+======================================================================================================
+
+createRoot
+    한 번도 index.js에 있는 코드들에 관심을 가진 적이 없다.
+    하지만 portals를 공부하면서 index.js에 있는 ReactDOM.createRoot(document.getElementById('root')); 코드가 궁금해진다
+
+    createRoot()가 생기기 전에는 ReactDOM.render()했었다고 한다.
+    strictMode를 사용하면 render()사용시 오류가 난다
+
+    Portal과 동일한 기능
