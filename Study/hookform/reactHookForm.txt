@@ -1,0 +1,54 @@
+라이브러리 설치
+	npm i react-hook-form
+
+
+useForm({
+	mode: "onChange" | "onSubmit" | "onBlur" | "all"
+	defaultValues: {}
+})
+
+	mode에 onChange로 두면 다수의 리랜더링이 발생할 수 있어 성능에 영향을 끼칠수 있다
+	defaultValues를 제공하지 않을 경우 input의 초기값이 undefined로 관리된다
+
+	useForm을 통해 컨트롤할 폼 객체를 리턴 받아, register()를 통해 input 태그를 다룰 수 있다
+
+register('name', {...객체...}) =>  validation
+	name: 해당 필드를 다루게 될 key 값으로 필수적
+	객체: options 객체. 해당 객체에는 유효성 검사를 위한 properties (required, min, max, minLength, maxLength, pattern 등..)
+
+	유효성 검사를 위해 value 만 줄 수도 있지만, value, message로 구성된 객체를 적음으로써
+	해당 에러에 대한 구체적인 메세지를 제공할 수 있다.
+
+	register("name", {required: "해당 필드는 필수입니다.", minLength: {
+		value: 3,
+		message: "3글자 이상 입력해주세요."
+		}
+	});
+
+
+formState 객체 내에서 에러에 대한 정보를 찾을 수 있다 (formState.errors)
+	그 외에도 submitCount(submit한 횟수), dirtyFields(기본값이 수정된 필드 => dirtyFields를 사용하기 위해선 defaultValues를 제공해야함)
+	touchedFields(사용자에 의해 수정된 필드), isValid(에러가 있는지 없는지 확인)
+
+< 값 추척 >
+	watch() => 폼에 입력된 값을 구독하여 실시간으로 체크할 수 있게 해주는 함수
+		매개 변수를 주지 않는다면 전체 값을 관찰할 수 있고, 매개변수(name)을 주면 해당 값만 관찰
+		defaultValues가 없을 경우 초기값이 undefined로 관리된다
+
+	getValues()도 값을 추적하는 것이 가능하다
+
+	=> watch()는 추적하여 값을 반환하고 해당 값에 따라 리랜더링 시킴
+	   하지만 getValues는 값 반환하지만 리랜더링 X
+
+
+reset() => 비동기 데이터를 활용해 기존의 데이터를 폼에 뿌려줘야하는데 reset()이 그 기능을 함
+
+
+---------------------------------------------------------------------------------------------------------------------------
+
+React 와  JSX 는 <a> 링크와 <label for> 등은 사용 불가
+	<a>는 <Link to="./경로"></Link>
+	<label>은 for가 아닌 htmlfor를 사용해야함. <label htmlFor="string"></label>
+
+	html에서는 label과 input을 연결해야할 때 label에서는 for로 input에서는 id로 둘이 같은 것임을 표시
+	하지만 리액트 jsx에서는 label태그를 사용할 때 htmlfor를 사용해야함
