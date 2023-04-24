@@ -1,9 +1,9 @@
-import SignUp from "./signUp";
+import SignIn from './signIn';
 
 function App() {
   return (
-    <div className="App">
-      <SignUp />
+    <div className='App'>
+      <SignIn />
     </div>
   );
 }
