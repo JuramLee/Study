@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { getIssues, getTargetIssue } from '../../Reducer/issues';
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getIssues, getTargetIssue } from "../../reducer/issues";
 
-import Post from './Components/post';
-import FilterOption from './Components/filter';
-import Pagination from './Components/pagination';
+import Post from "./Components/post";
+import FilterOption from "./Components/filter";
+import Pagination from "./Components/pagination";
 
 const Main = () => {
   const { issues } = useSelector((state) => state.issue);
   const [per_page, setPer_page] = useState(10);
   const [page, setPage] = useState(1);
-  const [sort, setSort] = useState('created');
+  const [sort, setSort] = useState("created");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -27,15 +27,15 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    if (!searchParams.get('per_page')) return;
+    if (!searchParams.get("per_page")) return;
     // setPer_page(searchParams.get('per_page'));
     // setSort(searchParams.get('sort'));
     // setPage(searchParams.get('page'));
     dispatch(
       getIssues({
-        per_page: searchParams.get('per_page'),
-        page: searchParams.get('page'),
-        sort: searchParams.get('sort'),
+        per_page: searchParams.get("per_page"),
+        page: searchParams.get("page"),
+        sort: searchParams.get("sort"),
       })
     );
   }, [searchParams]);
@@ -72,7 +72,7 @@ const Main = () => {
   };
 
   const onClickPrevious = (pageNum) => {
-    const paramOffset = parseInt(searchParams.get('page'));
+    const paramOffset = parseInt(searchParams.get("page"));
     setPage(paramOffset);
     setSearchParams({
       per_page,
@@ -109,7 +109,7 @@ const Main = () => {
   };
 
   return (
-    <div className='py-8'>
+    <div className="py-8">
       <FilterOption onClickOption={onClickOption} onClickCount={onClickCount} />
       {issues &&
         issues.map((issue, idx) => (

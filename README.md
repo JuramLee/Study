@@ -28,6 +28,7 @@ Skeleton UI, InfiniteScroll(useInview()), useInfiniteQuery, styled-component
 |
 📂 Study
 ├─📂 address: 주소 찾기 api(daum) 사용법 익히기
+├─📂 hookform: 리액트 훅폼으로 validation 연습
 ├─📂 mapapi: 지도 api(kakao) 사용법 익히기
 ├─📂 tailwind: tailwind css 이해와 정리
 |
