@@ -1,0 +1,12 @@
+    TYPESCRIPT 공부
+----------------------------------------------------------------------------------------
+
+  파일 생성
+      npx create-react-app 파일명 --typescript -> 얘는 안되는듯
+    * npx create-react-app 파일명 --template typescript
+
+  .ts vs .tsx
+    .ts파일은 pure typescript 파일. javascript에서 .js에 대응한다고 생각하면 편하다
+    .tsx는 typescript의 react문법을 담아내기 위한 확장자. .jsx에 대응한다고 생각하면 편하다.
+
+  
