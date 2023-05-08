@@ -31,6 +31,7 @@ Skeleton UI, InfiniteScroll(useInview()), useInfiniteQuery, styled-component
 ├─📂 hookform: 리액트 훅폼으로 validation 연습
 ├─📂 mapapi: 지도 api(kakao) 사용법 익히기
 ├─📂 tailwind: tailwind css 이해와 정리
+├─📂 type: typescript 이해와 정리
 |
 📂 Toy-project
 ├─📂 movie: infiniteScroll, skeleton UI, sticky side-menu, styled-component
