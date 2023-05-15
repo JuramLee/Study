@@ -33,3 +33,6 @@
         https://velog.io/@wony_yoon/Axios%EB%A1%9C-formData-%EC%9D%B4%EC%9A%A9%ED%95%B4-file-%EC%98%AC%EB%A6%AC%EA%B8%B0
 
         https://velog.io/@iameunyu/react-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%93%9C-%EB%B0%8F-%EC%82%AD%EC%A0%9C
+
+* string으로 넘길 때 join()써서 넘기는 방식
+    (괄호)안에 아무 조건을 넣지 않으면 ','로 이어진다
