@@ -44,3 +44,4 @@
       => function은 promise처리가 이뤄지는 함수. axios 요청코드라고 생각하면 됨
       https://jforj.tistory.com/243
     - useMutation() : 캐싱한 데이터 변경할 때 사용 가능. 여기서 포인트는 useMutation()은 등록 담당이고 등록한 mutation 사용은 mutate()로 해야함
+        도움이 된 ref : https://velog.io/@raverana96/react-query-useMutation-%ED%9B%84-invalidate%ED%95%B4%EB%8F%84-refetch%EA%B0%80-%EB%8F%99%EC%9E%91%ED%95%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EB%AC%B8%EC%A0%9C
