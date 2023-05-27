@@ -43,4 +43,4 @@
       => key는 고유 key값으로 []안에 안넣고 string으로 그냥 넣어도 길이가 1인 배열로 인식함. 예) ['키값'] == '키값'
       => function은 promise처리가 이뤄지는 함수. axios 요청코드라고 생각하면 됨
       https://jforj.tistory.com/243
-    
+    - useMutation() : 캐싱한 데이터 변경할 때 사용 가능. 여기서 포인트는 useMutation()은 등록 담당이고 등록한 mutation 사용은 mutate()로 해야함
