@@ -33,3 +33,15 @@
         https://velog.io/@wony_yoon/Axios%EB%A1%9C-formData-%EC%9D%B4%EC%9A%A9%ED%95%B4-file-%EC%98%AC%EB%A6%AC%EA%B8%B0
 
         https://velog.io/@iameunyu/react-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%93%9C-%EB%B0%8F-%EC%82%AD%EC%A0%9C
+
+* JAVASCRIPT
+    string화 할 때 join()써서 넘기는 방식. (괄호)안에 아무 조건을 넣지 않으면 ','로 이어진다
+
+* React query
+    - useQuery() 데이터 캐싱. 조회가 아닌 데이터 변경 작업은 useMutaion()
+    - useInfiniteQuery(key, function) : 파라미터 값만 변경해 동일한 useQuery를 무한정 호출할 때 사용. 대표적으로 infinite scroll에서 쓰임 
+      => key는 고유 key값으로 []안에 안넣고 string으로 그냥 넣어도 길이가 1인 배열로 인식함. 예) ['키값'] == '키값'
+      => function은 promise처리가 이뤄지는 함수. axios 요청코드라고 생각하면 됨
+      https://jforj.tistory.com/243
+    - useMutation() : 캐싱한 데이터 변경할 때 사용 가능. 여기서 포인트는 useMutation()은 등록 담당이고 등록한 mutation 사용은 mutate()로 해야함
+        도움이 된 ref : https://velog.io/@raverana96/react-query-useMutation-%ED%9B%84-invalidate%ED%95%B4%EB%8F%84-refetch%EA%B0%80-%EB%8F%99%EC%9E%91%ED%95%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EB%AC%B8%EC%A0%9C
