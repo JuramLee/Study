@@ -17,6 +17,7 @@ Skeleton UI, InfiniteScroll(useInview()), useInfiniteQuery, styled-component
 - json-placeholder : [Link](https://jsonplaceholder.typicode.com/)
 - git-issue : [Link](https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#list-user-account-issues-assigned-to-the-authenticated-user)
 - movie-trailer : [Link](https://developers.themoviedb.org/3/movies/get-movie-videos)
+- ZoopZoop : [Link](https://zoopzoop-market.vercel.app/)
 
 ## <br></br>
 
