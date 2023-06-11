@@ -1,0 +1,6 @@
+lazy loading, code splitting. suspense, automatic batching
+
+lazy loading
+    lazy lets you defer loading component’s code until it is rendered for the first time.
+    
+    https://react.dev/reference/react/lazy#lazy
