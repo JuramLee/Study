@@ -1,0 +1,42 @@
+포트폴리오 작성기
+
+- About (introduction)
+    내 소개
+
+- Project
+    팀플
+        줍줍
+        깃이슈
+        무비트레일러
+        검색엔진
+    토이
+        투두리스트
+        
+- Career
+    Qt
+    Mobis
+    Internship
+
+- Share (contact)
+    티스토리
+    깃허브
+
+
+레퍼런스
+http://parkjin.com/
+https://www.parkjin.dev/about
+https://github.com/jinpark0625?tab=overview&from=2023-06-01&to=2023-06-12
+
+인트로에 뭘둘지?
+
+컨셉은?
+    깔끔한거면 좋겟다..
+    흰 화면으로 가보자
+
+
+랜딩페이지 - 홈 - about - project - career - Share
+
+---------------------------------------------------
+https://brunch.co.kr/@bunbury/96
+https://m.blog.naver.com/sijin921/221906395138
+https://hyoni-k.tistory.com/121
