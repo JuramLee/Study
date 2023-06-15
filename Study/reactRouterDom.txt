@@ -1,4 +1,86 @@
 react-router-dom v6의 동작 원리
 
     react-router-dom이란?
-    
+    리액트에서 페이지를 이동할 때 필요한 라이브러리
+    원래는 각각의 html 파일을 보여주면 되지만 SPA인 리액트에서 페이지 전환을 표현하기 위해 필요함
+
+    클라이언트 사이드 라우팅
+        클라이언트 사이드 라우팅이란 서버에게 별다른 요청을 보내지 않고 클라이언트의 브라우저 단에서만 여러 페이지들을 왔다 갔다 방문할 수 있는 기능을 말한다. 
+        클라이언트 사이드 라우팅의 구현에 있어 가장 중요한 핵심 세 가지는 다음과 같다.
+            현재 URL에 맞는 UI(즉, 컴포넌트)를 렌더링 할 수 있어야 한다.
+            페이지의 리로드 없이 다른 페이지를 방문할 수 있는 내비게이션 기능이 있어야 한다.
+            사용자의 액션(앞으로 가기, 뒤로 가기 등)에 의해 URL이 변경될 때 이를 감지하고 처리할 수 있어야 한다.
+        그렇다면 이제 react-router 패키지와 react-router-dom 패키지가 이러한 클라이언트 사이드 라우팅을 어떻게 구현하고 있는지 하나씩 차근차근 살펴보자. 그리고 나면 
+        이러한 라우팅 관련 정보들을 Redux의 스토어에서 관리하기 위한 connected-react-router 패키지에 대해서도 간단히 한 번 살펴보자.
+
+
+리액트는 index.html 의 div 엘리먼트 하나만 두고, 자바스크립트 모든 부분을 동적으로 렌더링하는 구조를 취한다. 사실 별도의 라이브러리 없이 state만으로 라우팅을 구현할 수 있다. ( onClick event로)
+
+문제점
+
+- 새로고침하면 Home으로 무조건 되돌아가게 됨.(state 초기화)
+- 고유의 url path가 없어 즐겨찾기를 할 수 없음.
+- 뒤로가기 버튼을 누르면 이전 페이지가 아닌 그 전에 머물던 웹사이트로 이동함.
+
+### Link 컴포넌트
+html 에서 `<a />` 태그와 유사한 기능을 하는 컴포넌트. `to = ''` 로 이동할 경로를 지정해줌.
+
+### Route 컴포넌트
+`<Route>` 컴포넌트는 현재 주소창의 경로와 매치될 경우 보여줄 컴포넌트를 지정하는데 사용된다. path prop을 통해서 매치시킬 경로를 지정하고 component prop을 통해서 매치되었을 때 보여줄 컴포넌트를 할당한다.
+
+### Router 컴포넌트
+`<Router />` 컴포넌트는 `<Route />` 컴포넌트와 `<Link />` 컴포넌트가 유기적으로 동작하도록 묶어주는데 사용함.
+
+**`<Route>`와 `<Link>` 컴포넌트는 DOM 트리 상에서 항상 를 공통 상위 컴포넌트로 가져야한다.**
+=> HashRouter, BrowserRouter, StaticRouter, MemoryRouter
+
+### switch 컴포넌트
+Switch는 Route 중 하나가 매칭되면 다른 항목은 신경쓰지 않고 리턴
+
+> <Switch>
+        <Route path="/" exact component={Home} /> //리턴
+        <Route path="/sub" component={SubPage} /> //리턴
+        <Route path="/" component={Profile} /> //프로필 리턴
+      </Switch>
+> 
+
+=> link profile 클릭하면 /profile -> '/' path는 Home 하나만 리턴됨. -> '/' , '/sub' 이 아닌 모든 url profile 리턴
+[https://velog.io/@holicholicpop/REACTRouter-1.리액트-라우터-기본개요-동작원리](https://velog.io/@holicholicpop/REACTRouter-1.%EB%A6%AC%EC%95%A1%ED%8A%B8-%EB%9D%BC%EC%9A%B0%ED%84%B0-%EA%B8%B0%EB%B3%B8%EA%B0%9C%EC%9A%94-%EB%8F%99%EC%9E%91%EC%9B%90%EB%A6%AC)
+
+동작 원리
+<BrowserRouter>는 클라이언트 사이드 라우팅을 위해 라우팅 관련 컴포넌트들의 최상단에 위치해야하는 컴포넌트 (in react-router-dom) 이는 <Router>(in react-router) 컴포넌트를 래핑한 컴포넌트
+<BrowserRouter> 컴포넌트는 <Router> 컴포넌트를 렌더링 할 때 props로 history 객체를 전달
+<Router> 컴포넌트는 마운트 되는 순간에 props로 전달받은 history 객체의 프로퍼티인 location 객체를 자신의 지역 상태에 저장한다
+즉, 브라우저의 현재 URL에 관한 정보를 <Router> 컴포넌트가 지역 상태로서 실시간으로 추적하겠다는 의미인 것이다.<Router> 컴포넌트 인스턴스가 생성될 때의 로직이다.
+<Router> 컴포넌트의 렌더링 로직
+<Router> 컴포넌트는 현재의 URL과 관련된 몇몇 정보들을 Context로 구성해서 해당 Context의 Provider 컴포넌트(이하 <RouterContext.Provider>)를 렌더링 한다.
+<Router> 컴포넌트의 자식 컴포넌트들은 브라우저의 현재 URL이 변경될 때마다 항상 리렌더링 되는 것일까? 지금까지 설명한 구조로 봐서는 이론적으로 그렇다. 그러나 코드를 뜯어본 결과, <RouterContext.Provider> 컴포넌트는 다시 또 다른 Context에 해당하는 Provider 컴포넌트(이하 <RouterHistoryContext.Provider>)를 렌더링 하도록 구현되어 있었다.
+리렌더링의 전파 흐름은 <RouterHistoryContext.Provider> 컴포넌트까지 전달되었다가 이 컴포넌트의 리렌더링이 이뤄지지 않으므로 여기서 전파 흐름이 끊기게 된다. 대신 <Router> 컴포넌트의 지역 상태(location 객체)가 변경되는 경우는 그러한 전파 흐름이 끊기더라도 RouterContext를 구독하는 각종 라우팅 관련 컴포넌트(<Switch>, <Route> 등)들은 리렌더링이 유발된다. 이는 Context API의 특징이다.
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4ae5ddf6-8d5b-4493-8222-0270217ba824/Untitled.png)
+
+https://it-eldorado.tistory.com/113
+
+지금까지 설명한 각 컴포넌트들의 역할을 종합하여 동작 원리를 요약하자면 다음과 같다.
+
+1. 브라우저를 켜서 처음 서버에 접속하면 <Router> 컴포넌트의 지역 상태가 history.location 객체로 초기화된다.
+2. 이제 유저는 <Link> 컴포넌트에 의해 렌더링 된 <a> 태그를 클릭하거나 브라우저의 특정 액션(앞으로 가기, 뒤로 가기 등)을 수행함으로써 현재 URL을 바꿀 수 있다. → 페이지 리로드 없는 내비게이션
+3. 그러면 앞서 history 객체를 이용하여 설정해둔 구독 메커니즘에 의해 <Router> 컴포넌트의 지역 상태인 location 객체가 새로운 것으로 변경된다. → 현재 URL 관련 정보를 <Router> 컴포넌트의 지역 상태로 관리 (현재 URL 구독)
+4. 이로 인해 <Router> 컴포넌트가 리렌더링 되고, 그 결과 RouterContext의 값이 새로 구성되면서, 트리의 하위에 존재하는 각종 라우팅 관련 컴포넌트들이 리렌더링 된다. → 현재 URL에 맞는 UI 렌더링
+    - <Switch> 컴포넌트는 현재 URL과 자식 엘리먼트들의 path props 값을 다시 매칭 해서 렌더링 할 엘리먼트를 다시 선택한다.
+    - <Route> 컴포넌트는 현재 URL과 path props 값을 다시 매칭 해서 match 객체, location 객체, history 객체를 렌더링 할 컴포넌트에게 넘겨준다. 이때 match 객체와 location 객체는 history 객체와 달리 참조값이 다른 새로운 객체이다.
+
+https://reactrouter.com/en/main/start/overview
+
+# 0. react-rounter-dom이 뭔가요?
+`react-router`과 `react-rounter-dom`에 대해 들어는 봤지만 명확한 차이는 모르시는 분들이 계실 겁니다.
+**`react-router-dom` 모듈**은 `react-router` v4 버전에서 처음 릴리즈 된 라우팅 모듈로, **`react-router` 모듈에 dom이 바인딩 되어 있는 모듈**입니다.
+v3버전까진 `react-router` 모듈 하나만을 사용할 수 있었는데, v4버전 이후 `react-router` 모듈을 코어로, 웹 개발자를 위한 `react-router-dom`과 앱 개발자를 위한 `react-router-native`가 릴리즈 되었습니다.
+사실 빠른 속도로 계속 업데이트 되고 있지만, 본 포스팅은 현재 가장 최근 릴리즈된 v5.2버전을 중심으로 react-router-dom를 설명할 예정입니다.
+[https://velog.io/@devstone/react-router-dom-이해하고-활용하기](https://velog.io/@devstone/react-router-dom-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B3%A0-%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B0)
+from react-router-dom v6, `<Switch />` has been replaced by `<Routes />`.
+
+https://stackoverflow.com/questions/66313344/react-router-whats-the-difference-between-router-and-switch
+
+- 궁금한거
+    리액트 라우터돔이 서버에 데이터를 요청해서 받아오고 뿌리는게 아니라 이미 불려진거에서 그 주소에 맞게 UI를 그려주는거라면,, lazy loading은 필요에 의한 시점에 리소스를 받아온다 햇는데 그럼 상충되는거 아닌가?
+    ⇒ 이미 불려진거가 없이 요이땅!을 router dom이 해주면 lazy loading은 리소스를 불러다 그리는 역할의 차이
