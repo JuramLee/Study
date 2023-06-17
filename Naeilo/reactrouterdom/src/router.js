@@ -16,7 +16,7 @@ const createRouter = () => {
           (route) => route.fragment === window.location.hash
         );
         console.log(currentRoute);
-        currentRoute.component(); // 페이지 이동을 보여주기 위해 innerText를 변경하는 메서드
+        currentRoute?.component(); // 페이지 이동을 보여주기 위해 innerText를 변경하는 메서드 근데 자꾸 에러남..
       };
 
       window.addEventListener('hashchange', checkRoutes); // 브라우저에서 hash값이 바뀔때 발생하는 이벤트.
