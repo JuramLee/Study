@@ -1,0 +1,22 @@
+**hooks를 최적화하여 사용하기** 
+    1. state 최적화를 위한 방법
+        1. Independent child, careless parent
+        2. Minimal states, minimal render
+        3. lifting the state
+        
+        https://react.dev/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state
+        
+        https://react.dev/learn/sharing-state-between-components#lifting-state-up-by-example
+        
+    2. memoization 꼭 필요한가?
+        1. [https://velog.io/@lky5697/stop-using-usememo-now](https://javascript.plainenglish.io/stop-using-usememo-now-e5d07d2bbf70)
+        2. [https://bum-developer.tistory.com/entry/React-useMemo를-사용하지-말아야-한다](https://bum-developer.tistory.com/entry/React-useMemo%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EB%A7%90%EC%95%84%EC%95%BC-%ED%95%9C%EB%8B%A4)
+    3. custom hook과 context-api를 활용한 의존성 주입
+        1. special-session 
+        2. 단 예시는 특별 세션에서 다룬 예시가 아닌 본인의 프로젝트에서 찾아서 구현
+    4. **각 개인은 a,b,c의 모범 사례를 작성하여 git-hub에 커밋하고,  레포지토리 주소를 첨부**
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+state란?
