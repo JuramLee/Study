@@ -141,3 +141,6 @@ PureComponent
 memoization은 순수함수의 입력(인자)이 같으면 리턴하는 값도 항상 같다는 점을 이용해 한번 계산한 반환 값을 저장해두고 다음 입력이 들어올 때 저장된 값을 반환합니다. React의 React.memo는 “순수” 컴포넌트(PureComponent)에 들어갈 입력, 즉, Props, State가 같은 경우 같은 렌더링 결과가 나온다는 점을 렌더링에 이용하는 거죠. 
 다만 React.memo의 경우엔 어디다 결과를 저장해두고 반환한다기 보다는 Props와 State가 같으면 굳이 렌더링을 하지 않는 형태로 구현하는 겁니다.
 https://velog.io/@shin6403/React.memo-useCallback-%EC%82%AC%EC%9A%A9%EC%9C%BC%EB%A1%9C-%EB%A0%8C%EB%8D%94%EB%A7%81-%EC%B5%9C%EC%A0%81%ED%99%94-%ED%95%98%EA%B8%B0feat.React-NativeRedux
+
+https://juramemo.tistory.com/7
+https://juramemo.tistory.com/8
