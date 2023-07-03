@@ -53,7 +53,7 @@ function App() {
         onScroll={debounce}>
         <div style={{ width: '130px', height: '10000px' }}>
           <div style={{ position: 'fixed', textAlign: 'center' }}>
-            Nothing : {debNum}
+            Debounce : {debNum}
           </div>
         </div>
       </div>
@@ -67,7 +67,7 @@ function App() {
         onScroll={throttle}>
         <div style={{ width: '130px', height: '10000px' }}>
           <div style={{ position: 'fixed', textAlign: 'center' }}>
-            Nothing : {throtNum}
+            Throttle : {throtNum}
           </div>
         </div>
       </div>
