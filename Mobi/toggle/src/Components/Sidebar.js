@@ -1,72 +1,50 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import * as FaIcons from 'react-icons/fa';
-import * as AiIcons from 'react-icons/ai';
-import SubMenu from './SubMenu';
-import { IconContext } from 'react-icons/lib';
-import { SidebarData } from '../Components/SidebarData';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { Link, useLocation } from "react-router-dom";
+import * as FaIcons from "react-icons/fa";
+import * as AiIcons from "react-icons/ai";
+import SubMenu from "./SubMenu";
+import { IconContext } from "react-icons/lib";
+import { SidebarData } from "../Constants/SidebarData";
 
-const Sidebar = ({ activeMenu, setActiveMenu }) => {
-  const [data, setData] = useState(SidebarData);
+const Sidebar = () => {
   const [sidebar, setSidebar] = useState(false);
+  const location = useLocation();
 
-  const showSidebar = () => setSidebar(!sidebar);
-  // useEffect(() => {
-  //   const stored = sessionStorage.getItem('storedData');
-  //   setData(stored);
-  // }, []);
+  const [activeMenu, setActiveMenu] = useState(location.pathname);
 
-  const onClickParentToggle = (path) => {
-    const dataCopy = data.map((el) => {
-      return {
-        ...el,
-        isToggled: el.path === path,
-      };
-    });
-    setData(dataCopy);
-  };
-
-  const onClickChildToggle = (path) => {
-    const dataCopy = data.map((el) =>
-      el.subNav?.map((child) => {
-        return {
-          ...el,
-          ...child,
-          isChecked: child.path === path,
-        };
-      })
-    );
-    setData(dataCopy);
-  };
+  useEffect(() => {
+    sessionStorage.setItem("activeMenu", location.pathname);
+    setActiveMenu(location.pathname);
+  }, [location]);
 
   return (
     <>
-      <IconContext.Provider value={{ color: '#fff' }}>
+      <IconContext.Provider value={{ color: "#fff" }}>
         <Nav>
-          <NavIcon to='#'>
-            <FaIcons.FaBars onClick={showSidebar} />
+          <NavIcon to="#">
+            <FaIcons.FaBars onClick={() => setSidebar(true)} />
           </NavIcon>
         </Nav>
-        <SidebarNav sidebar={sidebar}>
-          <SidebarWrap>
-            <NavIcon to='#'>
-              <AiIcons.AiOutlineClose onClick={showSidebar} />
-            </NavIcon>
-            {data.map((item, index) => {
-              return (
-                <SubMenu
-                  item={item}
-                  key={index}
-                  activeMenu={activeMenu}
-                  setActiveMenu={setActiveMenu}
-                  onClickParentToggle={onClickParentToggle}
-                  onClickChildToggle={onClickChildToggle}
-                />
-              );
-            })}
-          </SidebarWrap>
-        </SidebarNav>
+        {sidebar && (
+          <SidebarNav>
+            <SidebarWrap>
+              <NavIcon to="#">
+                <AiIcons.AiOutlineClose onClick={() => setSidebar(false)} />
+              </NavIcon>
+              {SidebarData.map((data, index) => {
+                return (
+                  <SubMenu
+                    item={data}
+                    key={index}
+                    activeMenu={activeMenu}
+                    setActiveMenu={setActiveMenu}
+                  />
+                );
+              })}
+            </SidebarWrap>
+          </SidebarNav>
+        )}
       </IconContext.Provider>
     </>
   );
@@ -94,14 +72,15 @@ const NavIcon = styled(Link)`
 const SidebarNav = styled.nav`
   background: #15171c;
   width: 250px;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   position: fixed;
   top: 0;
-  left: ${({ sidebar }) => (sidebar ? '0' : '-100%')};
+  left: 0;
   transition: 350ms;
   z-index: 10;
+  overflow-y: auto;
 `;
 
 const SidebarWrap = styled.div`

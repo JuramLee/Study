@@ -27,7 +27,7 @@ export const MessagesTwo = () => {
 
 const Wrapper = styled.div`
   display: flex;
-  height: 90vh;
+  height: 100%;
   align-items: center;
   justify-content: center;
   text-align: center;

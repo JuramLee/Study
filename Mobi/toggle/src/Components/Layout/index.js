@@ -1,30 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { Outlet } from 'react-router';
-import { styled } from 'styled-components';
-import Sidebar from '../Sidebar';
+import React from "react";
+import { Outlet } from "react-router";
+import { styled } from "styled-components";
+import Sidebar from "../Sidebar";
 
 const Layout = () => {
-  const [activeMenu, setActiveMenu] = useState(null);
-  const location = useLocation();
-
-  useEffect(() => {
-    const savedActiveMenu = sessionStorage.getItem('activeMenu');
-    savedActiveMenu && setActiveMenu(savedActiveMenu);
-  }, []);
-
-  useEffect(() => {
-    sessionStorage.setItem('activeMenu', activeMenu);
-  }, [activeMenu]);
-
-  useEffect(() => {
-    setActiveMenu(null);
-  }, [location]);
-
   return (
     <Wrapper>
       <SidebarWrapper>
-        <Sidebar activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
+        <Sidebar />
       </SidebarWrapper>
       <Outlet />
     </Wrapper>
@@ -35,8 +18,10 @@ export default Layout;
 
 const Wrapper = styled.section`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: black;
+  position: fixed;
+  overflow: hidden;
 `;
 
 const SidebarWrapper = styled.div`

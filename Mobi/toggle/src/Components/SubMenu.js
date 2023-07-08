@@ -1,96 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-const SubMenu = ({
-  item,
-  activeMenu,
-  setActiveMenu,
-  onClickParentToggle,
-  onClickChildToggle,
-}) => {
-  const [subnav, setSubnav] = useState(false);
-
-  useEffect(() => {
-    const savedActiveMenu = sessionStorage.getItem('activeMenu');
-    savedActiveMenu && setActiveMenu(savedActiveMenu) && setSubnav(true);
-  }, []);
-
-  const showSubnav = () => setSubnav(!subnav);
-
-  const handleMenuClick = (menuId) => {
-    if (activeMenu === menuId) {
-      setActiveMenu(null);
-    } else {
-      setActiveMenu(menuId);
-    }
-  };
+const SubMenu = ({ item, activeMenu, setActiveMenu }) => {
+  const [showSubNav, setShowSubNav] = useState(activeMenu.includes(item.path));
+  const showSubnav = () => setShowSubNav(!showSubNav);
 
   return (
     <>
-      {item.isToggled ? (
-        <SidebarLinkChecked
-          to={item.path}
-          onClick={() => {
-            if (item.subNav) {
-              showSubnav();
-            }
-            onClickParentToggle(item.path);
-          }}
-          active={activeMenu === item.path}>
-          <div>
-            {item.icon}
-            <SidebarLabel>{item.title}</SidebarLabel>
-          </div>
-          <div>
-            {subnav && item.subNav
-              ? item.iconOpened
-              : item.subNav
-              ? item.iconClosed
-              : null}
-          </div>
-        </SidebarLinkChecked>
-      ) : (
-        <SidebarLink
-          to={item.path}
-          onClick={() => {
-            if (item.subNav) {
-              showSubnav();
-            }
-            onClickParentToggle(item.path);
-          }}
-          active={activeMenu === item.path}>
-          <div>
-            {item.icon}
-            <SidebarLabel>{item.title}</SidebarLabel>
-          </div>
-          <div>
-            {subnav && item.subNav
-              ? item.iconOpened
-              : item.subNav
-              ? item.iconClosed
-              : null}
-          </div>
-        </SidebarLink>
-      )}
-      {subnav &&
-        item.subNav.map((subItem, index) => {
-          return (
-            <DropdownLink
-              to={subItem.path}
-              key={index}
-              active={activeMenu == subItem.path}>
-              {subItem.icon}
-              <SidebarLabel
-                onClick={() => {
-                  handleMenuClick(subItem.path);
-                  onClickChildToggle(subItem.path);
-                }}>
-                {subItem.title}
-              </SidebarLabel>
-            </DropdownLink>
-          );
-        })}
+      <SidebarLink to={item.path} onClick={showSubnav}>
+        <div>
+          {item.icon}
+          <SidebarLabel>{item.title}</SidebarLabel>
+        </div>
+        <div>{item.subNav && <>{showSubNav ? item.iconOpened : item.iconClosed}</>}</div>
+      </SidebarLink>
+      {item.subNav &&
+        showSubNav &&
+        item.subNav.map((subItem, index) => (
+          <DropdownLink
+            to={subItem.path}
+            key={index}
+            active={activeMenu === subItem.path ? "true" : "false"}
+            onClick={() => setActiveMenu(subItem.path)}
+          >
+            {subItem.icon}
+            <SidebarLabel>{subItem.title}</SidebarLabel>
+          </DropdownLink>
+        ))}
     </>
   );
 };
@@ -104,7 +41,7 @@ const SidebarLink = styled(Link)`
   align-items: center;
   padding: 20px;
   list-style: none;
-  height: 60px;
+  height: 50px;
   text-decoration: none;
   font-size: 18px;
 
@@ -115,28 +52,13 @@ const SidebarLink = styled(Link)`
   }
 `;
 
-const SidebarLinkChecked = styled(Link)`
-  display: flex;
-  color: white;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  list-style: none;
-  height: 60px;
-  text-decoration: none;
-  font-size: 18px;
-  background: green;
-  border-left: 4px solid greenyellow;
-  cursor: pointer;
-`;
-
 const SidebarLabel = styled.span`
   margin-left: 16px;
 `;
 
 const DropdownLink = styled(Link)`
-  background: gray;
-  height: 60px;
+  background: ${({ active }) => (active === "true" ? "green" : "gray")};
+  height: 50px;
   padding-left: 3rem;
   display: flex;
   align-items: center;
@@ -148,16 +70,4 @@ const DropdownLink = styled(Link)`
     background: green;
     cursor: pointer;
   }
-`;
-
-const DropdownLinkChecked = styled(Link)`
-  height: 60px;
-  padding-left: 3rem;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: white;
-  font-size: 18px;
-  background: green;
-  cursor: pointer;
 `;

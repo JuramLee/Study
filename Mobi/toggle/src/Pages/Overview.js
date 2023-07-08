@@ -27,7 +27,7 @@ export const Revenue = () => {
 
 const Wrapper = styled.div`
   display: flex;
-  height: 90vh;
+  height: 100vh;
   align-items: center;
   justify-content: center;
   text-align: center;
