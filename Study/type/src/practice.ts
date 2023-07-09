@@ -14,5 +14,6 @@ document.body.textContent = greeter(user);
 let obj: object = { name: 'NAME', age: 29 };
 
 obj = { A: 'A', B: 'B' };
+console.log(obj);
 
 export {};
