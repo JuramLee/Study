@@ -36,6 +36,7 @@
 
 * JAVASCRIPT
     string화 할 때 join()써서 넘기는 방식. (괄호)안에 아무 조건을 넣지 않으면 ','로 이어진다
+    string.substr(start, length) start는 시작 위치, length는 잘라낼 문자열의 길이
 
 * React query
     - useQuery() 데이터 캐싱. 조회가 아닌 데이터 변경 작업은 useMutaion()
@@ -45,4 +46,5 @@
       https://jforj.tistory.com/243
     - useMutation() : 캐싱한 데이터 변경할 때 사용 가능. 여기서 포인트는 useMutation()은 등록 담당이고 등록한 mutation 사용은 mutate()로 해야함
         도움이 된 ref : https://velog.io/@raverana96/react-query-useMutation-%ED%9B%84-invalidate%ED%95%B4%EB%8F%84-refetch%EA%B0%80-%EB%8F%99%EC%9E%91%ED%95%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EB%AC%B8%EC%A0%9C
+
 
