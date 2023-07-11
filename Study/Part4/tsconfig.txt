@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+
+    "strict": true,                 
+        // 타스 기능을 얼마나 엄격하게 적용해서 변환시킬지. 
+           false의 경우 자바스크립트 파일과 거의 유사할 정도로 타입이 지정이 안되어도 잘 동작함
+
+    "target": "ES5",
+    "module": "CommonJS",
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+        // strict 모드 하위의 세부 옵션
+           타입을 지정해두지 않으면 any가 기본값으로 들어가있듯이 동작하지만 true인 상태이면 any이면 안됨
+           => 즉 정확히 어떤 타입인지 기술하도록 유도하는 기능
+
+    "noImplicitThis": true,
+    "sourceMap": true,
+        // dist 폴더 하위의 .map으로 끝나는 파일이 sourceMap이다
+           브라우저에 실행시 자스로 바뀐 타스 파일을 저장해줘서 어떤 코드를 쳤었는지 확인하는 파일(연결정보)
+           개발환경과 실행환경의 일치라고 생각하면 됨
+
+    "downlevelIteration": true
+  }
+}
+
+타스의 핵심 기능은 자스의 타입 확장 구문 제공 
+dist 라는 폴더(디렉토리)는 타스 컴파일러가 타스 파일을 변환한 결과를 출력해 놓은 타겟 디렉토리
+    
+
+
+https://yamoo9.gitbook.io/typescript/cli-env/tsconfig#tsconfig.json
+
+typescript type
+    DOM element를 반환하는 값의 타입은 HTMLElement
