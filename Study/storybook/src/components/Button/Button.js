@@ -10,9 +10,11 @@ function Button({ label, backgroundColor, size, color, clickHandler }) {
   };
 
   return (
-    <button onClick={clickHandler} style={style}>
-      {label}
-    </button>
+    <>
+      <button onClick={clickHandler} style={style}>
+        {label}
+      </button>
+    </>
   );
 }
 

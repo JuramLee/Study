@@ -1,8 +1,9 @@
 import Button from './Button';
 
 export default {
-  title: 'Button',
+  title: 'Challenge2/Button',
   component: Button,
+  // tags: ['autodocs'], // Docs라는 파일이 생김
   argTypes: {
     clickHandler: { action: 'clicked' },
     size: {
@@ -17,19 +18,30 @@ export default {
         type: 'radio',
       },
     },
+    borderType: {
+      options: ['double', 'solid', 'dotted', 'dashed'],
+      control: {
+        type: 'radio',
+      },
+    },
   },
 };
 
-const Template = (args) => <Button {...args} />;
+const ButtonTemplate = (args) => <Button {...args} />;
 
-export const Red = Template.bind({});
+export const Red = ButtonTemplate.bind({});
 Red.args = {
   label: 'Red',
   backgroundColor: 'red',
+  // onclick: () => console.log('클릭되었습니다'),
 };
 
-export const Blue = Template.bind({});
+export const Blue = ButtonTemplate.bind({});
 Blue.args = {
   label: 'Blue',
   backgroundColor: 'blue',
 };
+
+/*
+  CSS3부터는 args를 쓰면 알아서 component에게 전달함
+*/
