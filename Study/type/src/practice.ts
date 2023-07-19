@@ -9,7 +9,8 @@ function greeter(person: Person) {
 
 let user = { firstName: 'June', lastName: 'User' };
 
-document.body.textContent = greeter(user);
+// document.body.textContent = greeter(user);
+console.log(greeter(user));
 
 let obj: object = { name: 'NAME', age: 29 };
 
