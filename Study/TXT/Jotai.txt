@@ -1,2 +1,24 @@
 Jotai는 recoil과 비슷하고, zustand는 redux와 비슷하다.
+리덕스는 외부 store의 값을 참고하는 느낌이라면 리코일 조타이는 atom 값들이 모여 store를 만드는 느낌?
+Jotai는 React의 useState, useContext를 합쳐놓은 느낌.
 
+**사용법**
+
+npm i jotai로 설치한다.
+
+provider로 전역 상태 관리를 하고 있어서 최상단 컴포넌트에 provider를 씌워줘야한다.
+import {Provider as JotaiProvider} from 'jotai';    // 이건 그냥 이름 지어준거
+
+초기값 atom을 생성하고 useAtom으로 값을 받고 수정할 수 있다.
+import { atom } from 'jotai';
+
+export const dataAtom = atom('초기값');
+export const stringAtom = atom<string>("");
+
+그다음 만들어둔 atom에 접근하기 위한 useAtom 사용.
+import { useAtom } from 'jotai';
+
+const [data, setData] = useAtom(dataAtom);
+const [getter, setter] = useAtom(만들어둔 atom);
+
++ 여기서 주의할 점 : useAtom(여기 안에 atom(..)이 오면 무한 루프에 빠짐. 따라서 같은 값을 넣더라도 변수에 담아서 넣자)
