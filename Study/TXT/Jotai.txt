@@ -1,0 +1,2 @@
+Jotai는 recoil과 비슷하고, zustand는 redux와 비슷하다.
+
