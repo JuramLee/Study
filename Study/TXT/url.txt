@@ -1,0 +1,48 @@
+localhost:3000/
+
+* 페이지 이동은 Link, navigate으로 가능
+  navigate( '/이동경로', { state: { 키: 값, 키: 값, ... } } ) 으로 설정하면 useLocation.state로 받을 수 있다.
+        const navigate = useNavigate();
+        navigate('/something/3');
+
+1. URL parameters
+    routing 설정에서 path: '/something/:test'가 있다면, 
+    페이지 이동시 넘겨준 주소에서 해당 test 값을 가져오는 방법이 useParams()를 사용하는 방법이다.
+
+        const { test } = useParams();   // 3    // 변수명은 routing에서 /: 뒤에 적어준 이름이다.
+            구조분해할당 아니면 아래처럼 접근가능
+        const params = useParams();
+        params.test;                    // 3
+
+2. Query parameters
+    URL에서 ? 물음표 뒤에 있는 키=값 형태는 쿼리 혹은 쿼리스트링이라고 한다. 여러개를 이을 땐 &로 잇는다.
+    쿼리스트링은 라우팅 경로에 영향을 주지 않는다.
+    파라미터가 아닌 현재 페이지의 pathname을 가져오려면 useLocation()을 사용해야한다.
+    또한 쿼리스트링은 숫자나 불리언 값이 넘어와도 string으로 인식된다는 점 참고하자.
+
+        1. useLocation();
+            const location = useLocation();
+            console.log(location);  // hash, pathname, search, state를 포함한 객체로 넘어온다.
+            이때 쿼리스트링만 가지고 오기 위해선 search를 사용하면 된다.
+
+        2. useSearchParams()
+            localhost:3000/search/?keyword=홍길동&type=1
+
+            const [searchParams, setSearchParams] = useSearchParams(); // 데이터값, 데이터 setter
+            searchParams.get('keyword');            // 홍길동
+            setSearchParams({keyword: '임꺽정'});    // ?keyword=임꺽정&type=1
+
+                또는
+            const params = new URLSearchParams(location.search);
+            params.get('type');                     // 1
+            params.set('keyword','임꺽정');          // ?keyword=임꺽정&type=1
+
+          * 값을 가져오는 메소드
+                - searchParams.get(key): 가장 먼저나오는 value 를 return
+                - searchParams.getAll(key): 해당하는 value를 배열로 return
+                - searchParmas.toString(): 가공하지 않은 값을 그대로를 원할 때 사용
+          * 값을 변경하는 메소드
+                - seachParams.set(key, value): key 값을 value로 변경
+                - searchParams.appned(key, value): key의 기존값 변경없이 추가
+             위 메소드를 사용해도 URL의 쿼리스트링은 변하지 않고, setSearchParams(searchParams)해줘야 변경됨
+

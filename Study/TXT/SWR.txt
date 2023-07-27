@@ -1,0 +1,30 @@
+SWR(stale-while-revalidate)
+    - SWR은 먼저 캐시(stale)로부터 데이터를 반환한 후, 
+      fetch 요청(revalidate)을 하고, 최종적으로 최신화된 데이터를 가져오는 전략
+    - SWR은 상태관리용 라이브러리가 아닌 데이터 가져오기(fetch)용 라이브러리
+    - 로컬 상태변수를 원격 상태와 연결된 데이터 스트림으로써 바라볼 수 있도록 데이터 fetching 단계를 추상화한다.
+    - SWR이 내부적으로 지속적인 데이터 폴링을 하고 있기 때문에 원격 서버의 상태를 실시간 데이터 스트림으로 얻을 수 있다.
+
+**사용**
+key자리에는 보통api(데이터 고유 식별자, 동일 키의 중복 호출시 중복을 제거하는 과정을 처리하기 위해 필요), 
+fetcher에는 axios나 fetch와 같은 비동기 함수가오고, fetcher함수에 key값이 첫번째 파라미터로 전달된다.
+
+key: 
+    1. useSWR('/api/user', () => fetcher('/api/user'))
+    2. useSWR('/api/user', url => fetcher(url))
+    3. useSWR('/api/user', fetcher)
+    4. multiple arguments : 토큰값처럼 fetch시 여러개의 인자가 필요할 경우
+        틀린방법 : token값이 바뀌면 변화를 인지하지 못한다.
+            useSWR('/api/user', url => fetchWithToken(url, token))
+        옳은방법 : 
+            const { data: user } = useSWR(['/api/user', token], ([url, token]) => fetchWithToken(url, token))
+
+fetcher:
+    optional한 값이다. 데이터 패치하는 함수를 반환하는 Promise
+--------------------------------------------------------------------------
+
+    const { data, error, isLoading } = useSWR('key', fetcher, options)
+     or
+    function 커스텀 () {
+        return useSWR('key', fetcher)
+    }
