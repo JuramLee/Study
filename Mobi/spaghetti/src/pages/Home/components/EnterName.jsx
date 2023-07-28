@@ -1,27 +1,27 @@
-import React from "react";
-import { styled } from "styled-components";
+import React from 'react';
+import { styled } from 'styled-components';
 
-const GetName = ({ setIsBackGroundBlur }) => {
+const EnterName = ({ setIsBackGroundBlur }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const userName = e.target.userName.value.trim();
-    if (!userName) return alert("이름을 입력해주세요");
-    localStorage.setItem("userName", userName);
+    if (!userName) return alert('이름을 입력해주세요');
+    localStorage.setItem('userName', userName);
     setIsBackGroundBlur(false);
-    e.target.userName.value = "";
+    e.target.userName.value = '';
   };
 
   return (
     <S.BlurBackGround>
       <S.UserNameForm onSubmit={onSubmit}>
-        <input type="text" name="userName" placeholder="Enter your name" />
-        <button type="submit">Submit</button>
+        <input type='text' name='userName' placeholder='Enter your name' />
+        <button type='submit'>Submit</button>
       </S.UserNameForm>
     </S.BlurBackGround>
   );
 };
 
-export default GetName;
+export default EnterName;
 
 const BlurBackGround = styled.div`
   position: fixed;

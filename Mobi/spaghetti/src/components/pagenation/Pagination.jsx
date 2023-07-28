@@ -1,33 +1,9 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { fetching } from "../../util/utility";
+import { useSearchParams } from 'react-router-dom';
 
 const LIMIT_PAGE = 10;
-const LIMIT_TAKE = 20;
 
-const PagiNation = ({ address }) => {
+const PagiNation = ({ data }) => {
   const [params, setParams] = useSearchParams();
-  const [pageNation, setPageNation] = useState();
-
-  const fetchCommentPageNation = async () => {
-    const option = {
-      params: {
-        page: params.get("page") ?? 1,
-        take: params.get("take") ?? LIMIT_TAKE,
-        limit: params.get("limit") ?? LIMIT_PAGE,
-      },
-    };
-    const res = await fetching(address, option);
-    const pageNation = res.PageNation;
-    setPageNation({
-      ...pageNation,
-    });
-  };
-
-  useEffect(() => {
-    fetchCommentPageNation();
-  }, [params]);
 
   const onClickPage = (page) => {
     setParams({
@@ -35,29 +11,29 @@ const PagiNation = ({ address }) => {
     });
   };
 
-  const isPrevPageVisible = pageNation?.startPage !== 1;
+  const isPrevPageVisible = data?.startPage !== 1;
   const isNextPageVisible =
-    Math.ceil(pageNation?.currentPage / LIMIT_PAGE) !==
-    Math.ceil(pageNation?.totalPage / LIMIT_PAGE);
+    Math.ceil(data?.currentPage / LIMIT_PAGE) !==
+    Math.ceil(data?.totalPage / LIMIT_PAGE);
 
   return (
     <div>
       {isPrevPageVisible && (
-        <button onClick={() => setParams({ page: pageNation.startPage - 1 })}>
+        <button onClick={() => setParams({ page: data.startPage - 1 })}>
           이전
         </button>
       )}
-      {pageNation &&
-        Array(pageNation.endPage - pageNation.startPage + 1)
+      {data &&
+        Array(data.endPage - data.startPage + 1)
           .fill()
-          .map((_, i) => pageNation.startPage + i)
+          .map((_, i) => data.startPage + i)
           .map((page) => (
             <button key={page} onClick={() => onClickPage(page)}>
               {page}
             </button>
           ))}
       {isNextPageVisible && (
-        <button onClick={() => setParams({ page: pageNation.endPage + 1 })}>
+        <button onClick={() => setParams({ page: data.endPage + 1 })}>
           다음
         </button>
       )}

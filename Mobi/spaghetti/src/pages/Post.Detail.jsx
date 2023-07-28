@@ -1,9 +1,10 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import PagiNation from "../components/pagenation/Pagination";
-import { fetching } from "../util/utility";
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import PagiNation from '../components/pagenation/Pagination';
+import { fetching } from '../util/utility';
+import CheckLogin from '../hooks/CheckLogin';
 
+const LIMIT_PAGE = 10;
 const LIMIT_TAKE = 20;
 
 const PostDetailPage = () => {
@@ -13,20 +14,22 @@ const PostDetailPage = () => {
   const [isOpenCommentList, setIsOpenCommentList] = useState(false);
 
   const fetchPostDetail = async () => {
-    const address = "/api/post";
+    const address = '/api/post';
     const res = await fetching(address);
     setPostDetail(res);
   };
 
   const fetchComments = async () => {
-    const address = "/api/comments";
+    const address = '/api/comments';
     const option = {
       params: {
-        take: params.get("take") ?? LIMIT_TAKE,
+        page: params.get('page') ?? 1,
+        take: params.get('take') ?? LIMIT_TAKE,
+        limit: params.get('limit') ?? LIMIT_PAGE,
       },
     };
     const res = await fetching(address, option);
-    setCommentList(res.Comments);
+    setCommentList(res);
   };
 
   const onClickComments = async () => {
@@ -34,13 +37,9 @@ const PostDetailPage = () => {
   };
 
   useEffect(() => {
-    const userName = localStorage.getItem("userName");
-    if (!userName) {
-      alert("로그인이 필요합니다");
-      window.location.href = "/";
-    }
+    CheckLogin();
     fetchPostDetail();
-  }, []);
+  }, [params]);
 
   useEffect(() => {
     fetchComments();
@@ -53,17 +52,19 @@ const PostDetailPage = () => {
         <p>제목: {postDetail.title}</p>
         <p>내용: {postDetail.content}</p>
         <button onClick={onClickComments}>
-          {isOpenCommentList ? "댓글 숨기기" : "댓글 보기"}
+          {isOpenCommentList ? '댓글 숨기기' : '댓글 보기'}
         </button>
         {isOpenCommentList && (
           <>
-            {commentList.map((comment) => (
+            {commentList.Comments?.map((comment) => (
               <div key={comment.id}>
                 <p>{comment.content}</p>
                 <p>{comment.User.nickName}</p>
               </div>
             ))}
-            <PagiNation address={"/api/comments"} />
+            {commentList.PageNation && (
+              <PagiNation data={commentList.PageNation} />
+            )}
           </>
         )}
       </div>

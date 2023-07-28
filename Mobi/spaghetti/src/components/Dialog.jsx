@@ -1,6 +1,6 @@
-import { styled } from "styled-components";
-import { DialLogState } from "../contexts/DialogProvider";
-import React from "react";
+import { styled } from 'styled-components';
+import { DialLogState } from '../contexts/DialogProvider';
+import React from 'react';
 
 const Dialog = React.forwardRef(
   ({ type, text, onConfirm, onCancel, onClose, position }, ref) => {
@@ -16,7 +16,7 @@ const Dialog = React.forwardRef(
     );
   }
 );
-Dialog.displayName = "dialog";
+Dialog.displayName = 'dialog';
 export default Dialog;
 
 const Wrapper = styled.dialog`

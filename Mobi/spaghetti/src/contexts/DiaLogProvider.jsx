@@ -4,19 +4,19 @@ import {
   useEffect,
   useReducer,
   useRef,
-} from "react";
-import Dialog from "../components/Dialog";
+} from 'react';
+import Dialog from '../components/Dialog';
 
 export const DialLogState = {
-  ALERT: "ALERT",
-  CONFIRM: "CONFIRM",
-  DOUBLE_CHECK: "DOUBLE_CHECK",
-  CLOSE: "CLOSE",
+  ALERT: 'ALERT',
+  CONFIRM: 'CONFIRM',
+  DOUBLE_CHECK: 'DOUBLE_CHECK',
+  CLOSE: 'CLOSE',
 };
 
 const initialState = {
-  type: "",
-  text: "",
+  type: '',
+  text: '',
   isOpne: false,
   onConfirm: () => {},
   onCancel: () => {},
@@ -32,30 +32,14 @@ export const useDiaLogStore = () => useContext(DiaLogContext);
 
 const dialogReducer = (state, action) => {
   switch (action.type) {
-    case "ALERT":
-      const newOptionAlert = Object.assign({}, state);
-      newOptionAlert.type = action.type;
-      newOptionAlert.text = action.payload.text;
-      newOptionAlert.isOpen = action.payload.isOpen;
-      newOptionAlert.onConfirm = action.payload.onConfirm;
-      return newOptionAlert;
-    case "CONFIRM":
-      const newOptionConfirm = Object.assign({}, state);
-      newOptionConfirm.type = action.type;
-      newOptionConfirm.text = action.payload.text;
-      newOptionConfirm.isOpen = action.payload.isOpen;
-      newOptionConfirm.onConfirm = action.payload.onConfirm;
-      newOptionConfirm.onCancel = action.payload.onCancel;
-      return newOptionConfirm;
-    case "DOUBLE_CHECK":
-      const newOptionDoubleCheck = Object.assign({}, state);
-      newOptionDoubleCheck.text = action.payload.text;
-      newOptionDoubleCheck.onConfirm = action.payload.onConfirm;
-      return newOptionDoubleCheck;
-    case "CLOSE":
-      const newOptionClose = Object.assign({}, state);
-      newOptionClose.isOpen = false;
-      return newOptionClose;
+    case 'ALERT':
+      return { ...state, ...action.payload };
+    case 'CONFIRM':
+      return { ...state, ...action, ...action.payload };
+    case 'DOUBLE_CHECK':
+      return { ...state, ...action, ...action.payload };
+    case 'CLOSE':
+      return { ...state, isOpen: false };
     default:
       return state;
   }
