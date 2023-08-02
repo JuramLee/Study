@@ -1,0 +1,39 @@
+nodeJS 코드로 JS 작성하기 정리
+
+// 여기가 기본 사용하기 위한 셋팅
+const readline = require('readline');   // 모듈 불러오고
+const rl= readline.createInterface({    // 인터페이스 생성
+    input: process.stdin,
+    output: process.stdout
+});
+
+// 입력 받을 때
+let input = [];
+
+rl.on('line', function (line){
+    line 이벤트로 받은 내용을 처리하는 코드(콜백함수)
+    rl.close();
+});
+
+// 출력할 때
+.on('close', function() {
+    입력이 종료되었음을 알리는 close 이벤트 호출 후 출력값을 도출하는 코드(콜백함수) 
+    process.exit();
+});
+
+<입력>
+    rl.on() :  on() 메소드로 이벤트와 콜백 전달. 위 예시에서 line, close가 이벤트
+    line : 이벤트 => 입력받는 값을 한줄씩 읽어 문자열 타입으로 전달하는 역할을 하는 이벤트
+           입력받은 값이 한줄씩 문자열 형태로 저장됨
+    rl.close() : 인터페이스를 종료함으로써 무한 입력 방지. close 이벤트 발생시켜 출력값을 도출하는 코드
+------------------------------------------------------------------------------------------------
+<출력>
+    close : 더이상 입력되는 값이 없을 때 실행되는 이벤트
+    process.exit() : 프로세스를 종료시킴
+
+
+1) 공백을 포함한 한줄 입력 (입력값 : 10 20 30)
+    input = 문자열.split(' ').map(element => parseInt(element));
+
+2) 여러줄이 입력되는 경우, 한줄씩 입력되기 때문에 입력이 들어올때마다 배열에 담아주는 형태로 접근
+    input.push(line);
