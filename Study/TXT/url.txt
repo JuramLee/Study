@@ -1,15 +1,37 @@
 localhost:3000/
 
 * 페이지 이동은 Link, navigate으로 가능
-  navigate( '/이동경로', { state: { 키: 값, 키: 값, ... } } ) 으로 설정하면 useLocation.state로 받을 수 있다.
+    두번째 인자로 아무것도 안넘기면 그냥 주소로만 이동 -> navigate('/something/3');
+    navigate로 보내는 방법
+    1) navigate({
+         pathname: '/',
+         search: `?category=${category}`,
+       });
+    2) navigate('주소')
+
+    navigate의 두번째 인자에는 replace와 state가 올 수 있다.
+    1) replace
+        true를 주면 뒤로가기시 이전 주소가 아닌 메인으로 보내고, (히스토리를 남기지 않는다.)
+        false를 주면 뒤로가기 기능을 한다. (false가 default값)
+        navigate("주소", {
+            replace: true
+            }
+        );
+    
+    2) state
+        navigate( '/이동경로', { state: { 키: 값, 키: 값, ... } } ) 으로 설정하면 useLocation.state로 받을 수 있다.
         const navigate = useNavigate();
-        navigate('/something/3');
+        navigate('주소', {
+            state: {
+                key: value;
+            }
+        })
 
 1. URL parameters
     routing 설정에서 path: '/something/:test'가 있다면, 
     페이지 이동시 넘겨준 주소에서 해당 test 값을 가져오는 방법이 useParams()를 사용하는 방법이다.
-
-        const { test } = useParams();   // 3    // 변수명은 routing에서 /: 뒤에 적어준 이름이다.
+        navigate('/something/3');
+        const { test } = useParams();   // 변수명은 routing에서 /: 뒤에 적어준 이름이다.
             구조분해할당 아니면 아래처럼 접근가능
         const params = useParams();
         params.test;                    // 3
