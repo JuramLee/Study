@@ -1,0 +1,106 @@
+CSR(Client Side Rendering)과 SSR(Server Side Rendering), SSG(Static Site Generation)
+
+필요 개념
+    TTV(Time To View)
+    TTI(Time To Interact)
+
+* SSR
+    말 그대로 서버 쪽에서 랜더링 준비를 끝내고 클라이언트에 넘기는 방식
+    사용자가 요청을 보낸 후 무언가는 보고 있지만 JS 다운 완료 전까지 조작은 못함
+    깜빡임 이슈가 있다(사용자가 클릭할 때마다 새롭게 서버에서 데이터를 받아오기 때문)
+
+    순서
+        1. user가 website에 요청을 보냄
+        2. 서버가 즉시 랜더링이 가능한 html 파일을 만듦
+        3. 클라이언트가 받으면 즉시 화면이 그려지는데, 조작은 불가능(JS 읽히기 전 상태)
+        4. JS 다운. 다운이 완료되기 전까지의 사용자 조작을 기억하고 있음
+        5. JS 프레임워크 실행
+        6. 기억하고 있던 사용자 조작 실행 (이때부터는 페이지 조작 가능)
+
+* CSR
+    말 그대로 클라이언트 쪽에서 랜더링을 하는 방식
+    JS가 실행이 완료될 때까지 사용자는 빈화면을 봄
+
+    순서
+        1. user가 website에 요청을 보냄
+        2. html과 js 파일을 받음(사용자는 빈화면을 봄)
+        3. 랜더링
+        4. 가지고 있는 JS로 조작 가능
+
+    SEO 보완
+        pre-rendering을 통해 SEO를 개선할 수 있다. 
+         * pre-rendering이란?
+           페이지에서 JS 보다 html을 미리 만드는 것
+        라이브러리나 웹팩 플러그인을 통해 각페이지에 대한 HTML파일을 미리 생성해 둔 뒤 
+        서버에서 요청하는 자가 만약 크롤러라면 사전에 렌더링된 HTML버전 페이지를 보여주는 방식을 통해 개선가능
+
+    CSR에 SSR/SSG 도입 방법
+        - 프레임워크 없이 도입
+          : node.js, express.js, nest.js로 별도 서버를 직접 운영하는 방법
+        - 프레임워크로 도입
+          : next.js => 페이지 성격별로 ssg일지 ssr일지 정하는것도 가능
+          : gatsby.js => ssg에 최적화된 react 기반 정적페이지 생성 프레임워크
+          : nuxt.js => vue를 위한 프레임워크로 next.js에 영감을 받아 만들어짐
+          : angular universal => angular에서 ssr이 가능하게 해줌
+
+* SSG
+    클라이언트에서 필요한 페이지들을 사전에 미리 준비해뒀다가 
+    요청을 받으면 이미 완성된 파일을 단순히 반환하여 브라우저에서 뷰를 보여지는 것
+
+    동작방식
+        1. 사용자가 웹 페이지를 방문하면 엣지캐싱된 html 클라이언트로 반환
+          * 엣지캐싱이란?
+            최종 사용자에게 더 가까운 컨텐츠를 저장하기 위해 캐싱 서버를 사용하는것(대표적으로 CDN)
+        2. 브라우저는 html 다운로드하고 사이트를 보여준다.
+
+    react에서는 useEffect통해 데이터를 가지고 오는데 Nextjs에서 useEffect를 사용하면 SSG로 작동X 
+    => Nextjs에서 SSG를 하려면, Nextjs에서 제공하는 getStaticProps나 getStaticPaths를 사용한다.
+
+    SSR과의 차이점
+        SSR은 서버에 요청할 때 만들고 SSG는 미리 만들어두는것
+
+    Universal Rendering
+        SSR을 통해 빠른 FCP(First Contentful Paint : 첫 요소가 로드될 떄까지 걸리는 시간)를 구현한 후 클라이언트에서 rehydration이라는 기술을 통해 다시 랜더링하는 방식
+        즉, 초기 로딩시엔 SSR처럼 작동하고 그 이후는 CSR로 작동하는 방식
+        ----------------------------------------------------------------------------------------
+        단, 별도의 서버가 필요하며 구현에 들어가는 비용이 크다. 또한 페이지가 빨리 로드되서 조작가능해보이지만
+        실제로는 클라이언트에서 JS실행 후 이벤트 핸들러가 적용될 떄까지 조작불가 => UX가 안좋아질 수 있다
+
+    Hydration
+        pre-render시 생성된 html은 최소한의 JS와 연결된다. 
+        그 이후에 브라우저가 로딩될 때 남은 JS가 페이지와 상호작용하면서 페이지가 render된다.
+        ReactDOM.hydrate(element, container[, callback])
+        ReactDOM.hydrate(<App name="Saeloun"/>, document.getElementById('root'));
+    
+
+비교
+    - 페이지 로딩시간
+        1) 첫 페이지 로딩시간
+            SSR이 더 빠름 
+            => CSR은 초기에 모든 리소스들을 불러오고, SSR이 필요한 부분의 리소스만 불러오기 때문에 빠름
+        2) 나머지 페이지 로딩시간
+            CSR이 더 빠름
+            => CSR은 이미 초반에 몽땅 가지고 왔고, SSR은 다른 페이지로 이동시 리소스를 불러오기 때문에 느림
+
+    - SEO(검색엔진최적화)
+        SSR이 유리하다.
+        검색 엔진은 자동화된 로봇인 '크롤러'로 웹 사이트들을 읽는다. 
+        SSR은 서버 측에서 컴파일되어 클라이언트로 넘어오기 때문에 크롤러에 대응하기 용이
+        CSR은 최초 html이 <div id='root'></div> 태그 하나이기 때문에 검색엔진이 사이트 내용을 파악하기 어렵다
+        ------------------------------------------------------------------------------------------------------------------
+        검색엔진은 서버에 등록된 웹사이트들을 돌아다니며 html 문서를 분석하고 판단하여 사용자가 검색시 해당 웹페이지를
+        빠르게 찾을 수 있도록 도와주지만 CSR에서 사용되는 html은 대부분 텅텅 비어져있기 때문에 검색엔진이 분석하기 어렵다.
+
+    - 서버 리소스 사용
+        SSR이 더 많이 사용(필요시마다 계속 요청하기 때문)
+
+
+    
+
+Reference
+    - https://proglish.tistory.com/216
+    - https://onlydev.tistory.com/102
+    - https://velog.io/@ka0son/%EB%A0%8C%EB%8D%94%EB%A7%81-%EC%82%BC%ED%98%95%EC%A0%9C-CSR-SSR-SSG-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0#csrclient-side-rendering%EC%9D%B4%EB%9E%80
+    - https://ajdkfl6445.gitbook.io/study/web/csr-vs-ssr-vs-ssg
+    - https://han-py.tistory.com/489
+    - https://theodorusclarence.com/blog/nextjs-fetch-usecase
