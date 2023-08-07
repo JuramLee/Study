@@ -104,3 +104,4 @@ Reference
     - https://ajdkfl6445.gitbook.io/study/web/csr-vs-ssr-vs-ssg
     - https://han-py.tistory.com/489
     - https://theodorusclarence.com/blog/nextjs-fetch-usecase
+    - https://velog.io/@huurray/React-Hydration-%EC%97%90-%EB%8C%80%ED%95%98%EC%97%AC
