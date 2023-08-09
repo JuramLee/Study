@@ -14,7 +14,7 @@ TS는 콜백함수 내에서 타입가드가 유효하다고 판단하지 않기
 
   ```jsx
   function test(item) {
-    if (typeof item === string) {
+    if (typeof item === "string") {
       /*...item의 타입이 string일 경우 실행됨...*/
     }
 
