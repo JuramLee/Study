@@ -48,3 +48,8 @@
         도움이 된 ref : https://velog.io/@raverana96/react-query-useMutation-%ED%9B%84-invalidate%ED%95%B4%EB%8F%84-refetch%EA%B0%80-%EB%8F%99%EC%9E%91%ED%95%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EB%AC%B8%EC%A0%9C
 
 
+* TS 프로젝트 실행
+    - 리액트 프로젝트 내에서 ts-node와 tsc 실행은 안됨.
+      프로젝트 내에서는 commonJS를 지원하지 않아 ts-node 사용이 불가능하다.
+    - 하지만 node --loader ts-node/esm 파일경로를 명령어로 실행하면 프로젝트 외부에 있는 ts-node 모듈을 사용하여 ts파일 실행해볼 수 있다.
+    
