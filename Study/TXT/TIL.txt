@@ -52,4 +52,7 @@
     - 리액트 프로젝트 내에서 ts-node와 tsc 실행은 안됨.
       프로젝트 내에서는 commonJS를 지원하지 않아 ts-node 사용이 불가능하다.
     - 하지만 node --loader ts-node/esm 파일경로를 명령어로 실행하면 프로젝트 외부에 있는 ts-node 모듈을 사용하여 ts파일 실행해볼 수 있다.
-    
+    - https://github.com/TypeStrong/ts-node/issues/1997   
+    - https://typestrong.org/ts-node/docs/imports/
+
+
