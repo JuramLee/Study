@@ -27,7 +27,7 @@ console.log("deepCopy", deepCopy); // [ 0, 1, 2, 3, 4, 5 ]
 정적 메소드
 1. Array.from()
 2. Array.isArray()
-	3. Array.of()
+3. Array.of()
 */
 
 const staticArr = ["a", "b", "c"];
@@ -90,3 +90,95 @@ Array.copyWithin(target, start, end);
 const copyArr = [1, 2, 3, 4, 5, 6];
 const copy1 = copyArr.copyWithin(1, 2, 4);
 console.log(copy1); // 1, 3, 4, 4, 5, 6
+
+// Array.entries() : 배열의 각 인덱스에 대한 key-value를 가지는 새로운 배열 객체 반환
+/*
+sparse arrays와 사용하면 entries() 메서드가 빈 슬롯을 undefined 가 있는 것처럼 순회한다.
+*sparse arrays란?
+	배열의 길이보다 원소의 개수가 무조건 작은 배열이다.(빈 값도 포함)
+	전체 원소들 중 임의의 원소에 대해 해당 원소에 N번째 앞에 있는 원소를 빠르게 찾기 위해 사용하는 자료 구조
+	N번째 정점을 찾기 위해선 매 정점마다 +1씩 가야하므로 O(N)의 시간이 든다.
+	하지만 이때 sparse를 이용하면 O(logN)만에 갈 수 있다.
+
+	즉 한번에 한개씩 이동하는 것이 아니라 2^i개씩 이동하여 찾는 방식이다.
+*/
+const charArr = ["가", "나", "다", "라", "마"];
+for (let [idx, el] of charArr.entries()) {
+  console.log(idx, el);
+  /*
+ 0 가
+ 1 나
+ 2 다
+ 3 라
+ 4 마 
+  */
+}
+
+// Array.every() : 배열 안 모든 요소가 주어진 판별 함수를 통과하는지 테스트 후 boolean으로 반환
+/*
+callbackFn : 각 요소를 시험할 함수. 아래 3가지 인자를 받는다.
+	element : 처리되는 현재요소
+	index : 현재 요소의 인덱스
+	array : every를 호출한 배열
+thisArg : callbackFn을 실행할 때 this로 사용하는 값
+
+every는 빈 슬롯에 콜백함수를 실행하지 않는다.
+*/
+console.log(charArr.every((el, idx, arr) => arr.includes("사"))); // false
+console.log([2, , 2].every((x) => x === 2)); // true
+
+// Array.flat() : 모든 하위 배열 요소를 지정한 깊이까지 재귀적으로 이어붙인 새로운 배열 생성
+// depth의 기본값은 1이다. flat()은 결국 평탄화 작업이라고 생각하자.
+
+const arr1 = [1, 2, [3, 4]];
+const arr2 = [1, 2, [3, 4], , 5, 6, , [8, 9, [10, 11]]];
+const arr3 = [
+  1,
+  2,
+  [3, 4],
+  ,
+  5,
+  6,
+  ,
+  [8, 9, [10, 11, [12, 13, [14, 15, 16], 17]]],
+];
+console.log(arr1.flat()); // [1, 2, 3, 4]
+console.log(arr2.flat()); // [ 1, 2, 3, 4, 5, 6, 8, 9, [ 10, 11 ] ]
+// 공백 제거해주고 인자로 아무 값도 없으면 한번의 배열만 평탄화
+console.log(arr2.flat(2)); // [ 1, 2, 3, 4, 5, 6, 8, 9, 10, 11 ]
+// 인자로 2를 주면 2depth까지 평탄화
+console.log(arr3.flat(Infinity));
+// infinity는 1depth 배열이 될때까지 평탄화
+// [ 1,  2,  3,  4,  5,  6, 8,  9, 10, 11, 12, 13, 14, 15, 16, 17 ]
+
+// 대안으로 reduce와 concat이 있다. 아래 두 함수는 동일한 결과를 출력한다.
+console.log(arr1.flat());
+// [1, 2, 3, 4]
+console.log(arr1.reduce((acc, currentValue) => acc.concat(currentValue), []));
+// [1, 2, 3, 4]
+
+// Array.flatMap()
+/*
+먼저 매핑함수를 사용해 각 요소에 대해 map 실행 후 결과를 새로운 배열로 평탄화.
+depth가 1인 flat이 뒤따르는 map과 동일하지만, 이중 배열을 하나의 메소드로 병합할 때 더 효율적이다.
+*/
+
+let flatArr = [1, 2, 3, 4];
+
+flatArr.map((x) => [x * 2]);
+// [[2], [4], [6], [8]]
+
+flatArr.flatMap((x) => [x * 2]);
+// [2, 4, 6, 8]
+
+// 한 레벨만 평탄화됨
+flatArr.flatMap((x) => [[x * 2]]);
+// [[2], [4], [6], [8]]
+
+let flatMapArr = ["it's Sunny in", "", "California"];
+
+console.log(flatMapArr.map((x) => x.split(" ")));
+// [["it's","Sunny","in"],[""],["California"]]
+
+console.log(flatMapArr.flatMap((x) => x.split(" ")));
+// ["it's","Sunny","in","","California"]
