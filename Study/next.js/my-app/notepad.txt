@@ -1,0 +1,11 @@
+app 폴더 하위
+	page.js
+		메인 페이지
+	layout.js
+		page.js 파일을 감싸는 페이지
+		head태그 안에 내용이나, 상단메뉴 등을 넣으면 된다.
+	xxx.module.css
+		특정 페이지에만 적용 가능한 css
+
+api 폴더 하위
+	api 폴더는 서버 기능 만드는 곳
