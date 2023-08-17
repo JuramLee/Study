@@ -1,3 +1,5 @@
+Next.JS 사용법
+
 app 폴더 하위
 	page.js
 		메인 페이지
@@ -16,6 +18,8 @@ api 폴더 하위
 SSR 기술쪽을 API Route 라고 한다.
 
 .env 파일을 설정할 땐 
+	.env는 기본적으로 SSR에서만 사용가능함.
+	따라서 브라우저에서 사용하고 싶으면(CSR로 사용) 변수명 접두사로 NEXT_PUBLIC을 붙이면 됨
 	NEXT_PUBLIC_이라는 접두사를 적어야하고, 사용할 땐 리액트와 동일하게 precess.env.이름으로 사용하면됨
 
 
@@ -82,5 +86,11 @@ public 리소스 사용법
 
 	
 Cache
+	새로 데이터 받는 방법 : fetch한 걸 저장하지 않는 방법 혹은 revalidating
+	fetch할 때 옵션으로 
+		{next: {revalidate: 10}}을 하면 10초 동안만 캐싱할 것이다 라는 의미
+		{cache: 'no-store'}하면 캐싱을 하지 않겠다는 의미
+
 	MISS : 캐싱된 데이터가 없어서 요청함
 	HIT : 캐싱된 데이터를 사용했다
+
