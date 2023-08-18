@@ -115,6 +115,7 @@ export async function getStaticPaths() {
 ### ISR
 
 SSG와 동일하지만 일정시간마다 알아서 페이지를 업데이트 해준다는 차이가 있다.
+revalidate 값만 주면, 해당 주기마다 데이터의 최신 여부를 검사하고 최신화 해준다.
 
 ```jsx
 export const getStaticProps: GetStaticProps = async () => {
