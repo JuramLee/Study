@@ -137,7 +137,8 @@ ex) /post, /post/light, /post/dark
 a태그를 Link 태그로 바꾼다.
 `import Link from 'next/link'; `
 
-1. 그러면 마우스가 hover 되었을 때 이미 리소스를 다운 받아놓고 클릭하면 바로 보여줌 (prefetch 속성. default가 true)
+1. 뷰포트에 있는 모든 항목들이 pre-rendering되어 리소스를 미리 다운 받아놓고 클릭하면 바로 보여줌 (prefetch 속성. default가 true)  
+   false여도 마우스가 hover되면 prefetch된다. 또한 prefetch는 상용버전(production)에서만 활성화 된다.
 2. 또한 한번 방문한 페이지의 리소스는 다시 불러들이지 않는다.
 
 ### public 리소스 사용법
