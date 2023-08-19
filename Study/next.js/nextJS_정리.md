@@ -165,3 +165,15 @@ nextJS에서는 존재하지 않는 path가 왔을 때 기본적으로 제공하
 **500번대 에러**  
 pages폴더 아래 `_error.js` 파일을 만들면 된다.
 해당 페이지는 정적으로 최적화되지는 않는다. 왜냐하면 서버로 에러를 넘기는 작업이 빈번하기 때문
+
+### web storage
+
+nextJS는 client 사이드를 랜더하기 전에 server 사이드 랜더를 먼저 실행한다. 따라서 SSR과 CSR이 혼재하는 nextJS에서의 web-storage 관련 에러는 심심치 않게 난다. 따라서 nextJS에서의 웹스토리지 사용법을 정리한다.
+
+1. CSR일 때 사용한다.
+
+- useEffect 안에서 사용한다.
+
+2. 클래스를 사용한다.
+
+- componentDidMount 안에서 사용한다.
