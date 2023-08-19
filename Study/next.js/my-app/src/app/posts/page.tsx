@@ -29,10 +29,10 @@ export default function PostsMain() {
   return (
     <div>
       <h2>posts 페이지</h2>
-      {posts &&
+      {/* {posts &&
         posts.map((post) => {
           <div>{post.id}</div>;
-        })}
+        })} */}
     </div>
   );
 }
