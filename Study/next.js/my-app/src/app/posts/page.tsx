@@ -11,7 +11,7 @@ interface IPosts {
 
 export default function PostsMain() {
   const [posts, setPosts] = useState<IPosts[]>();
-  // let posts: Array<IPosts> = [];
+
   const getData = () => {
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((response) => response.json())
@@ -24,15 +24,27 @@ export default function PostsMain() {
     getData();
   }, []);
 
-  console.log(posts);
-
   return (
     <div>
       <h2>posts 페이지</h2>
-      {/* {posts &&
+      {posts &&
         posts.map((post) => {
-          <div>{post.id}</div>;
-        })} */}
+          return (
+            <div
+              key={post.id}
+              style={{
+                border: "1px solid grey",
+                marginBottom: "20px",
+                padding: "10px 15px",
+              }}
+            >
+              <div style={{ fontWeight: "bold", margin: "10px 0" }}>
+                {post.title}
+              </div>
+              <div>{post.body}</div>
+            </div>
+          );
+        })}
     </div>
   );
 }
