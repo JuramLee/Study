@@ -182,3 +182,33 @@ console.log(flatMapArr.map((x) => x.split(" ")));
 
 console.log(flatMapArr.flatMap((x) => x.split(" ")));
 // ["it's","Sunny","in","","California"]
+
+// Array.reduce()
+/*
+배열의 각 요소에 대해 주어진 리듀서 함수를 실행하고 하나의 결과값을 반환하는 함수
+총 4개의 인자를 가진다. (누산기, 현재값, 현재 인덱스, 원본 배열)
+함수의 반환값이 누산기에 할당되고, 누산기는 순회중 유지되므로 최종 결과 하나만 리턴
+ */
+
+let reduceArr = [1, 2, 4, 10];
+console.log(reduceArr.reduce((acc, cur) => acc + cur)); // 17
+console.log(reduceArr.reduce((acc, cur) => acc - cur)); // -15
+console.log(reduceArr.reduce((acc, cur, idx, init) => init)); // [ 1, 2, 4, 10 ]
+
+// Array.reduceRight()
+/*
+누적기에 대해 함수를 적용하고, 배열의 각 값은 값을 단일 값으로 줄여야한다.
+오른쪽 -> 왼쪽
+*/
+
+const reduceRightArr = [
+  [0, 1],
+  [2, 3],
+  [4, 5],
+];
+
+const result = reduceRightArr.reduceRight((accumulator, currentValue) =>
+  accumulator.concat(currentValue)
+);
+
+console.log(result); // [ 4, 5, 2, 3, 0, 1 ]
