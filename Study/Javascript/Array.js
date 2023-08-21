@@ -212,3 +212,30 @@ const result = reduceRightArr.reduceRight((accumulator, currentValue) =>
 );
 
 console.log(result); // [ 4, 5, 2, 3, 0, 1 ]
+
+// Array.some()
+/*
+배열을 순회하면서 조건에 맞는 값이 있으면 찾자마자 true리턴 후 종료, 없다면 false 리턴
+빈 값은 false를 바로 리턴 후 종료. 
+*/
+
+console.log([2, 5, 8, 1, 4].some((x) => x > 10)); // false
+console.log(["apple", "banana", "mango", "guava"].some((x) => x === "banana")); // true
+console.log([1, , 3].some((x) => x === undefined)); // false (빈 값 만나서 false 리턴 후 종료)
+
+// Array.values()
+/*
+순회 가능한 새로운 반복자. 빈 값은 undefined로 간주하고 계속 진행.
+한 번 사용한 반복자는 다시 사용 불가.
+*/
+
+const arrValues = ["a", "b", "c", "d", "e"];
+const values = arrValues.values();
+
+for (let one of values) {
+  console.log(one);
+}
+
+for (let two of values) {
+  console.log(two); // 실행 아예 안함
+}
