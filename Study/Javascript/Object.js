@@ -22,3 +22,5 @@ const objA = { 1: "a", 2: "b" };
 const objB = { 과일: "사과", 자동차: "bmw" };
 const newAssign = Object.assign({}, objA, objB);
 console.log(newAssign); // { '1': 'a', '2': 'b', '과일': '사과', '자동차': 'bmw' }
+
+// Object.create()
