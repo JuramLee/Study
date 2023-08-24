@@ -23,4 +23,15 @@ const objB = { 과일: "사과", 자동차: "bmw" };
 const newAssign = Object.assign({}, objA, objB);
 console.log(newAssign); // { '1': 'a', '2': 'b', '과일': '사과', '자동차': 'bmw' }
 
-// Object.create()
+// Object.entries()
+/*
+for in과 같은 순서로 객체 자체의 속성 쌍의 배열을 반환한다.
+*/
+
+const objEntries = {
+  a: "apple",
+  b: "banana",
+  c: "carrot",
+};
+
+console.log(Object.entries(objEntries)); // [ [ 'a', 'apple' ], [ 'b', 'banana' ], [ 'c', 'carrot' ] ]
