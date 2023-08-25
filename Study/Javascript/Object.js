@@ -35,3 +35,17 @@ const objEntries = {
 };
 
 console.log(Object.entries(objEntries)); // [ [ 'a', 'apple' ], [ 'b', 'banana' ], [ 'c', 'carrot' ] ]
+
+// Object.freeze();
+/*
+마치 readonly 처럼 변경 불가한 상수로 만들어버리는 함수
+*/
+
+const objFreeze = {
+  say: "hi",
+};
+
+Object.freeze(objFreeze);
+objFreeze.say = "123";
+
+console.log(objFreeze); // { say: 'hi' }
